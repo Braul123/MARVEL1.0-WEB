@@ -1,0 +1,47 @@
+/* Medidas para el responsive */
+@media (max-width: 600px){
+  img{
+    width: 93px !important;
+    height: 38px !important;
+    margin-top: 8px !important;
+  }
+
+  .imgMarvel{
+    margin-left: 0px !important;
+  }
+} 
+
+/* Estilos generales para el nav bar */
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.seccion{
+  height: 100%;
+}
+
+.mat-icon { 
+  font-size: 30px; width: 50px; 
+  color: #f23337;
+}
+
+.imgMarvel{
+  margin-left: 8px;
+  margin-top: 8px;
+  width: 171px;
+  height: 50px;
+}
