@@ -1,24 +1,32 @@
 
-<mat-sidenav-container class="sidenav-container"> 
+<mat-sidenav-container class="sidenav-container">
+  
   <mat-sidenav-content>
     <mat-toolbar style="background-color: #202020;">
-        <!-- Imagen y link marvel oficial -->
-        <div class="seccion" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayoutAlign="start center">
-          <a href="https://www.marvel.com/">
-            <img src="../../assets/img/logo-marvel.png" alt="img-marvel" class="imgMarvel" title="Marvel oficial" >
-          </a>
-        </div>
+       <!-- Imagen y link marvel oficial -->
+       <div class="seccion" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayoutAlign="start center">
+        <a href="https://www.marvel.com/">
+          <img src="../../assets/img/logo-marvel.png" alt="img-marvel" class="imgMarvel" title="Marvel oficial" >
+        </a>
+      </div>
+
+      <div class="seccion" fxFlex="60%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayoutAlign="center center">
+        <input type="text" style="min-width: 80%; height: 32px; text-transform: capitalize;" placeholder="Serch character">
         
-        <div class="seccion" fxFlex="60%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayoutAlign="center center">
-          <input type="text" style="min-width: 80%; height: 32px;" placeholder="Serch character">
-         
-        </div>
-        <div class="seccion" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayoutAlign="center center">
-          <mat-icon>favorite</mat-icon>
-        
-        </div>
+      </div>
+      <div class="seccion" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayoutAlign="center center">
+        <mat-icon>favorite</mat-icon>
       
+      </div>
     </mat-toolbar>
     <!-- Add Content Here -->
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+
+
+
+
+
+

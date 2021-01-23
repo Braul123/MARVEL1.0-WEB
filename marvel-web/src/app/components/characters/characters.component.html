@@ -1,0 +1,14 @@
+<div fxFlex fxLayout="column">
+    <div fxLayout="row wrap">
+        <div fxFlex="50%" fxFlex.md="33%" fxFlex.sm="50%" fxFlex.xs="100%" fxLayout="column"
+        *ngFor="let character of charactersAll | async" style="padding: 7px;">
+            <mat-card>
+                <img mat-card-image src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}" alt="{{character.name}}">
+                <mat-card-title>
+                    {{character.name}}
+                </mat-card-title>
+
+            </mat-card>
+        </div>
+    </div>
+</div>
