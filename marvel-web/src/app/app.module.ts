@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const appRoutes : Routes = [
   {
@@ -38,6 +39,7 @@ const appRoutes : Routes = [
     MatIconModule,
     FlexLayoutModule,
     HttpClientModule,
+    MatTooltipModule,
   ],
   exports: [
     FlexLayoutModule,

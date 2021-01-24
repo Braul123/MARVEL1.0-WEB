@@ -5,17 +5,18 @@
     <mat-toolbar style="background-color: #202020;">
        <!-- Imagen y link marvel oficial -->
        <div class="seccion" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayoutAlign="start center">
-        <a href="https://www.marvel.com/">
-          <img src="../../assets/img/logo-marvel.png" alt="img-marvel" class="imgMarvel" title="Marvel oficial" >
+        <a href="https://www.marvel.com/" target="_blank">
+          <img src="../../assets/img/logo-marvel.png" alt="img-marvel" class="imgMarvel" title="Official Marver">
         </a>
       </div>
 
       <div class="seccion" fxFlex="60%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayoutAlign="center center">
-        <input type="text" style="min-width: 80%; height: 32px; text-transform: capitalize;" placeholder="Serch character">
+        <input type="text" style="min-width: 80%; height: 32px; text-transform: capitalize;" placeholder="Serch character...">
         
       </div>
       <div class="seccion" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayoutAlign="center center">
-        <mat-icon>favorite</mat-icon>
+        
+        <img  class="imgFavorites" src="../../assets/img/favourites.png" alt="favorites" style="cursor: pointer;"  matTooltip="Go Favorites"> 
       
       </div>
     </mat-toolbar>

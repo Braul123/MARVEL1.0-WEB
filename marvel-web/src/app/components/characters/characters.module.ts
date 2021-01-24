@@ -12,6 +12,10 @@ import {MatCardModule} from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { LayoutModule } from '@angular/cdk/layout';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
+
 
 const routes = [
     {
@@ -35,7 +39,10 @@ const routes = [
         MatCardModule,
         MatListModule,
         LayoutModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        MatTooltipModule,
+        MatProgressBarModule,
+        MatSelectModule
     ],
     providers: [
         CharactersService

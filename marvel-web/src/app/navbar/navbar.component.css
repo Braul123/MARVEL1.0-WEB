@@ -8,6 +8,12 @@
 
   .imgMarvel{
     margin-left: 0px !important;
+    
+  }
+
+  .imgFavorites{
+    width: 30px !important;
+    margin: 0px !important;
   }
 } 
 

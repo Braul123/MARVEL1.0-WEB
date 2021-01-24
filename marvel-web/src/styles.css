@@ -1,3 +1,21 @@
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { height: 100%;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
+
+@media (max-width : 600px){
+    div.content{
+        padding: 15px !important;
+    } 
+}
+div.content{
+    background-color: #e8e8e8;
+    padding: 20px;
+}
+
+button.primary{
+    margin-top: 20px;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    width: 150px;
+}
