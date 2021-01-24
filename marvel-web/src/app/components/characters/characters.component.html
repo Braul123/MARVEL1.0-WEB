@@ -94,13 +94,17 @@
         <!-- Mostrar mas resultados -->
         <div fxLayout="column">
             <div fxFlex="100%" fxFlex.sm="50%" fxFlex.xs="100%" fxLayoutAlign="center center">
-                <button mat-button class="primary btnMore" (click)="viewMoreCharacterist(10)">VIEW MORE CHARACTERS</button>
+                <button mat-button class="primary btnMore" (click)="establecerCantRegistros(10 + limit)">VIEW MORE CHARACTERS</button>
             </div>
-            <div fxFlex="100%" fxFlex.sm="50%" fxFlex.xs="100%" fxLayoutAlign="center center">
-                <button mat-button class="btnMore">SHOW FEWER CHARACTERS</button>
+
+            <!-- Registros visualizados -->
+            <p class="typography noMargin" fxFlex="100%" fxFlex.sm="50%" fxFlex.xs="100%" fxLayoutAlign="center center">{{charactersAll.length}}/100</p>
+            <!-- Mostrar menos -->
+
+            <div *ngIf="limit > 10" fxFlex="100%" fxFlex.sm="50%" fxFlex.xs="100%" fxLayoutAlign="center center">
+                <button mat-button class="btnMore" (click)="establecerCantRegistros(limit -10)">SHOW FEWER CHARACTERS</button>
             </div>
         </div>
     </div>
-
 </div>
 

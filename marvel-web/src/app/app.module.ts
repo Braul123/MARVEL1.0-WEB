@@ -11,6 +11,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const appRoutes : Routes = [
   {
@@ -28,6 +29,7 @@ const appRoutes : Routes = [
   declarations: [
     AppComponent,
     NavbarComponent,
+  
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -40,12 +42,14 @@ const appRoutes : Routes = [
     FlexLayoutModule,
     HttpClientModule,
     MatTooltipModule,
+    MatSnackBarModule
   ],
   exports: [
     FlexLayoutModule,
     RouterModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule { }

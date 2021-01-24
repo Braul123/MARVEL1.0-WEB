@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { VirtualTimeScheduler } from 'rxjs';
 import { CharactersService }  from 'src/app/providers/characters/characters.service'
-
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ErrorServiceService } from 'src/app/providers/error-service/error-service.service'
 @Component({
   selector: 'app-characters',
   templateUrl: './characters.component.html',
@@ -9,14 +9,16 @@ import { CharactersService }  from 'src/app/providers/characters/characters.serv
 })
 export class CharactersComponent implements OnInit {
   
-  seleccioneCantidad = [10, 20, 50, 100, 200, "Todos"];
+  seleccioneCantidad = [10, 20, 50, 80, 100];
   public charactersAll : any ;
   public limit : number = 10;
   public progress: boolean = true
-  public totalRegistros = 0;
+  public messages : string = 'Hola Prueba'
 
   constructor(
     private characterService : CharactersService,
+    private messaje : MatSnackBar,
+    private errorService: ErrorServiceService,
     ) {}
 
 
@@ -30,7 +32,10 @@ export class CharactersComponent implements OnInit {
     this.charactersAll = [];
     await this.characterService.getCharacters(this.limit).then((data: any = []) =>{
       this.charactersAll = data.results;
-      this.totalRegistros = data.total
+    
+    //En caso de error - Lo muestra en pantalla
+    }).catch( error =>{
+      this.capturarMessage('Error: '+ error.error.code + error.error.status, 'error-dialog')
     });
 
     //Detiene la barra progresiva
@@ -39,25 +44,18 @@ export class CharactersComponent implements OnInit {
     }, 500);
   }
 
-  viewMoreCharacterist(cant){
-    this.limit += cant;
-    console.log(this.limit);
-    
-  }
-
   /**
   * Controla la cantidad de registros para ser visualizados
   */
   establecerCantRegistros(cant?): void {
-    // Si son todos obtiene todos los registros
-    if (cant == "Todos") {
-      this.limit = this.totalRegistros;
-    } else {
       this.limit = cant;
-    }
 
-    // Reinicio de página
-    this.getAllCharacters();
+      // Reinicio de página
+      this.getAllCharacters();
+  }
+    
+  capturarMessage(text: string, clase: string){
+    this.errorService.capturarMessage(text, clase);
   }
 
 }
