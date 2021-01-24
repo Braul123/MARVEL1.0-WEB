@@ -15,21 +15,10 @@ export class CharactersService {
 
   constructor(private http: HttpClient) { }
 
-  // Obtiene todos los personajes
-  getAllCharacters(limit? : number): Observable<any> {
-
-    let limite = 0;
-
-    //Si hay limite de respuesta la agrega
-    if(limit){
-      limite = limit; 
-      this.URL_API += `&limit=${limite}`;
-    } 
-    return this.http.get<any>(this.URL_API)
-      .pipe(map((data: any) => data.data.results))
-  }
+  
 
   getCharacters(limit? : number | 10){
+
     return new Promise((resolve, reject)=>{
 
       let apiUrl = this.URL_API;
@@ -43,8 +32,48 @@ export class CharactersService {
         reject(err);
       })
     })
+    
   }
 
+
+  /**
+   * 
+   *@description Obtiene todos los personajes mediante un for
+   * ya que la api solo permite obtener 100 por cada petición
+   */
+
+  async getAllCharacters(){
+
+    let offset = 0;
+    let results : any = [];
+    let charctersAll : any = [];
+
+    //itera la peticion para obtener mas de 100 registros
+    for(let i = 0; i <= 3; i++){
+      results = await this.apiCharactersAll(offset);
+      charctersAll = charctersAll.concat(results);
+      offset+= 100;
+    }
+
+  }
+
+
+  
+  //Obtiene wel maximo de personajes permitidos 
+  apiCharactersAll(offset : number){
+
+    return new Promise((resolve, reject)=>{
+
+      let apiUrl = this.URL_API + `&limit=100&offset=${offset}`;
+    
+      this.http.get(apiUrl).subscribe((data: any = [])=>{
+        resolve(data.data.results)
+      }, err => {
+        reject(err);
+      })
+    })
+    
+  }
 
 
 }

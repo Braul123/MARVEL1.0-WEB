@@ -5,7 +5,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { CharactersComponent } from './characters.component';
+import { CharactersComponent } from '../components/characters/characters.component';
 import { CharactersService } from 'src/app/providers/characters/characters.service';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
@@ -16,6 +16,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CardCharactersComponent } from '../components/card-characters/card-characters.component';
+
 const routes = [
     {
         path     : '',
@@ -26,6 +28,7 @@ const routes = [
 @NgModule({
     declarations: [
         CharactersComponent,
+        CardCharactersComponent
     ],
     imports     : [
         RouterModule.forChild(routes),

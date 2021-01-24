@@ -21,15 +21,14 @@ const appRoutes : Routes = [
   },
   {
     path: 'characters',
-    loadChildren: () => import('./components/characters/characters.module').then(m => m.CharactersModule)
+    loadChildren: () => import('./components/characters.module').then(m => m.CharactersModule)
   },
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-  
+    NavbarComponent, 
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

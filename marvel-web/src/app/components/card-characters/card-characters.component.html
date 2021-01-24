@@ -1,0 +1,64 @@
+ <!-- Ordena los prsonajes en filas de dos -->
+ <div fxLayout="row wrap">
+    <div fxFlex="50%" fxFlex.md="33%" fxFlex.sm="50%" fxFlex.xs="100%" fxLayout="column"
+    *ngFor="let character of charactersAll" style="padding: 7px;">
+
+    <!-- Agregar el card que contiene cada personaje -->
+    <mat-card style="background: #f9f9f9bd;" fxLayout="column">
+
+        <!-- Pone dos columnas en una fila -->
+        <div fxFlex FxLayout="row wrap" class="isMobile">
+
+             <!-- Para la imagen del personaje y comics relacionados -->
+            <div fxFlex="40%" fxLayout="column">
+                <div>
+                    <img class="pointer" mat-card-image src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}" alt="{{character.name}}">
+                </div>
+            </div>
+
+            <!-- Para el nombre y la descripcion -->
+            <div fxFlex="60%" fxLayout="column">
+                <div>
+                    <mat-card-title>
+                        {{character.name | uppercase}}
+                    </mat-card-title>
+                </div>
+                <div style="padding: 10px;">
+                    <div class="typography">
+                            {{character.description? (character.description | slice:1:217) + '...' : 'No description' }}
+                    </div>
+                </div>
+                <!-- Botón de ver más -->
+                <button mat-button class="primary">VIEW MORE</button>
+            </div>
+
+        </div>
+
+         <!-- Seccion para comics -->
+         <div fxFlex FxLayout="row wrap">
+            <div *ngIf="character.comics.available > 0;">
+                <div fxFlex="40%">
+                    <span class="typography">Related Comics </span>
+                        <p class="typography comics">
+                            This character appears in {{character.comics.available}} comics, including: <br>
+                            <mat-icon matTooltip="view more" class="iconMoreComics">arrow_right_alt</mat-icon>
+                        </p>
+                </div>
+
+               <!-- Para el nombre y la descripcion -->
+                    <div fxFlex="60%">
+                        <ul class="typography" >
+                            <li>{{character?.comics?.items[0]?.name}}</li>
+                            <li *ngIf="character?.comics?.items[1]">{{character?.comics?.items[1]?.name}}</li>
+                            <li *ngIf="character?.comics?.items[2]">{{character?.comics?.items[2]?.name}}</li>
+                        </ul>
+                    </div>
+            </div>
+               
+            <p *ngIf="character.comics.available == 0;" class="typography">This character does not appear in any related comic</p>
+
+       </div>
+
+    </mat-card>
+    </div>
+</div>

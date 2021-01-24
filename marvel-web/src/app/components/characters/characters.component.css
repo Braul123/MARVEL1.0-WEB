@@ -4,48 +4,12 @@
 }
 
 @media (max-width: 600px){
-  img.mat-card-image {
-    min-height: 108px !important; 
-    max-height: 108px !important;
-    min-width : 108px !important;
-    max-width : 108px !important;
-    border-radius: 50% !important;
-  }
-
   .fileSort {
     margin-left: 6px;
     margin-top: 20px !important;
     width: 96% !important;
   }
-
-  mat-card{
-    height: auto !important;
-  }
-
-  .isMobile{
-    margin-bottom: 50px !important;
-  }
 }
-img.mat-card-image {
-    min-height  : 236px;
-    max-height  : 236px;
-    min-width   : 244px;
-    max-width   : 244px;
-    border-radius: 50%;
-  }
-
-  span{
-    font-size: 19px;
-    font-weight: bold;
-    color: #2925259e;
-  }
-
-  mat-card{
-    max-width: 99%;
-    min-width: 99%;
-    margin-bottom: 7px;
-    height: 377px;
-  }
 
   .fileSort{
     width: 50%;
@@ -54,23 +18,6 @@ img.mat-card-image {
 
   .typography{
     color: #5f6565d9;
-  }
-
-  .comics{
-    margin-top: 10px;
-  }
-
-  .iconMoreComics{
-    font-size: 35px;
-    cursor: pointer;
-  }
-
-  .iconMoreComics:hover{
-    color: red;
-  }
-
-  .pointer{
-    cursor: pointer;
   }
 
   .btnMore{

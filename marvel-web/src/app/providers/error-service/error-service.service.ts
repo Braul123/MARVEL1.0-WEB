@@ -13,7 +13,7 @@ export class ErrorServiceService {
   capturarMessage(messageIn: string, classPanel: string){
     this.message.open(messageIn, '',{
       panelClass: classPanel,
-      duration: 1000
+      duration: 3000
     })
   }
 }

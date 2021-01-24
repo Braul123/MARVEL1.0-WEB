@@ -12,14 +12,18 @@ export class CharactersComponent implements OnInit {
   seleccioneCantidad = [10, 20, 50, 80, 100];
   public charactersAll : any ;
   public limit : number = 10;
-  public progress: boolean = true
+  public loading: boolean = false;
   public messages : string = 'Hola Prueba'
 
   constructor(
     private characterService : CharactersService,
     private messaje : MatSnackBar,
     private errorService: ErrorServiceService,
-    ) {}
+    ) {
+
+      //Obtiene toods los personajes
+      this.characterService.getAllCharacters();
+    }
 
 
   //Inicia la carga de datos
@@ -29,18 +33,19 @@ export class CharactersComponent implements OnInit {
 
   //Obtiene todas las caracteristicas de los personajes
   async getAllCharacters () {
+    this.loading = true;
     this.charactersAll = [];
     await this.characterService.getCharacters(this.limit).then((data: any = []) =>{
       this.charactersAll = data.results;
     
     //En caso de error - Lo muestra en pantalla
     }).catch( error =>{
-      this.capturarMessage('Error: '+ error.error.code + error.error.status, 'error-dialog')
+      this.capturarMessage('Error '+ error.error.code + ': ' + error.error.status, 'error-dialog');
     });
 
     //Detiene la barra progresiva
     setTimeout(() => {
-      this.progress = false; 
+      this.loading = false; 
     }, 500);
   }
 
@@ -48,14 +53,18 @@ export class CharactersComponent implements OnInit {
   * Controla la cantidad de registros para ser visualizados
   */
   establecerCantRegistros(cant?): void {
+    this.loading = true
       this.limit = cant;
 
       // Reinicio de página
       this.getAllCharacters();
   }
-    
+  
+  //Envia el error al servicio de errores
   capturarMessage(text: string, clase: string){
     this.errorService.capturarMessage(text, clase);
+    this.limit = 10; 
+    this.getAllCharacters();
   }
 
 }
