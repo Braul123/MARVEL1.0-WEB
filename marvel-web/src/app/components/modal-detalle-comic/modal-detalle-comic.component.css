@@ -1,0 +1,28 @@
+
+@media (max-width: 600px){
+    img{
+        width: auto !important;
+        height: aunto !important;
+    }   
+}
+
+img.character{
+    width: 300px;
+    height: 400px;
+}
+
+.typography{
+    color: #5f6565d9;
+    margin-top: 20px;
+}
+
+span{
+    font-size: 19px;
+    font-weight: bold;
+    color: #292525c4;
+}
+
+img.btn-close{
+    width: "10px" !important;
+    height: "10px" !important
+}

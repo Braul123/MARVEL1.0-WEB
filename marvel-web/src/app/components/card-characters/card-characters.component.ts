@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-card-characters',
@@ -12,16 +12,16 @@ export class CardCharactersComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
   }
 
 
-  goComics(id: any) : void{
-    console.log('Hola a');
+  goComics(id: any, name: string) : void{
     
-    this.router.navigate(['/characters/comics'],);
+    this.router.navigate(['/characters/comics'], {queryParams : {id: id}});
   }
 
 }

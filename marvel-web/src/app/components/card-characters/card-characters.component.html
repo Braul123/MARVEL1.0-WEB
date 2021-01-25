@@ -12,7 +12,7 @@
              <!-- Para la imagen del personaje y comics relacionados -->
             <div fxFlex="40%" fxLayout="column">
                 <div>
-                    <img class="pointer" mat-card-image src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}" alt="{{character.name}}">
+                    <img (click)="goComics(character.id)" class="pointer" mat-card-image src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}" alt="{{character.name}}">
                 </div>
             </div>
 
@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <!-- Botón de ver más -->
-                <button mat-button class="primary" (click)="goComics()">VIEW MORE</button>
+                <button mat-button class="primary" (click)="goComics(character.id)">VIEW MORE</button>
             </div>
 
         </div>
@@ -41,7 +41,7 @@
                     <span class="typography">Related Comics </span>
                         <p class="typography comics">
                             This character appears in {{character.comics.available}} comics, including: <br>
-                            <mat-icon matTooltip="view more" class="iconMoreComics">arrow_right_alt</mat-icon>
+                            <mat-icon (click)="goComics(character.id)" matTooltip="view more" class="iconMoreComics">arrow_right_alt</mat-icon>
                         </p>
                 </div>
 

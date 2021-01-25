@@ -20,6 +20,8 @@ import { CardCharactersComponent } from '../components/card-characters/card-char
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComicsCharacterComponent } from './comics-character/comics-character.component';
+import { ModalDetalleComicComponent } from './modal-detalle-comic/modal-detalle-comic.component';
+import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 const routes = [
     {
@@ -37,6 +39,7 @@ const routes = [
         CharactersComponent,
         CardCharactersComponent,
         ComicsCharacterComponent,
+        ModalDetalleComicComponent,
     ],
     imports     : [
         RouterModule.forChild(routes),
@@ -56,11 +59,14 @@ const routes = [
         MatSnackBarModule,
         MatAutocompleteModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatDialogModule,
+        
         
     ],
     providers: [
-        CharactersService
+        CharactersService,
+        { provide: MAT_DIALOG_DATA, useValue: {} }
     ],
     
 })

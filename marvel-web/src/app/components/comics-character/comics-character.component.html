@@ -1,1 +1,80 @@
-<p>comics-character works!</p>
+<!-- Contenedor de la pagina -->
+<div *ngIf="loading">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<div *ngIf="!loading" class="content">
+
+    <!-- Columna para el contenido -->
+    <div fxFlex fxLayout="column">
+
+        <!-- titulo del componente -->
+        <div class="header-page" fxLayout="row wrap">
+            <div fxFlex="50%" fxFlex.sm="50%" fxLayoutAlign="start center">
+                <img src="../../../assets/img/characters.png" alt="characters"
+                    width="67px">
+                <mat-card-title>Detail of {{character.name}}</mat-card-title>
+            </div>
+
+            <!-- Espacio para la cantidad de registros a visualizar -->
+            <div fxFlex="49%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayoutAlign="end center">
+                <mat-icon>arrow_left</mat-icon>
+               <a  href="/characters"> Return to characters</a>
+            </div>
+        </div>
+
+          <!-- titulo del componente -->
+          <div class="header-page" fxLayout="row wrap">
+            <div fxFlex="25%" fxFlex.sm="50%" fxLayoutAlign="start center">
+                <img class="character" src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}" alt="characters">
+
+            </div>
+
+            <!-- Espacio para la cantidad de registros a visualizar -->
+            <div class="isMobile" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayoutAlign="center start" fxLayout="column">
+                <span>{{character.name}}</span>
+                <p class="typography">
+                    {{character.description? (character.description | slice:1:217) + '...' : 'No description' }}    
+                </p>
+                <button mat-button class="primary">FULL DETAIL</button>
+            </div>
+        </div>
+
+        <!-- Separador -->
+        <div fxFlex="100%">
+            <hr style="opacity: 0.5;">
+        </div>
+        
+        <!-- titulo para los comics -->
+        <div fxFlex="100%" fxFlex.sm="50%" class="subtitle" fxLayoutAlign="start center">
+            <mat-icon>arrow_right</mat-icon>
+            <span> Related Comics - {{comicsAll.length}}</span> 
+        </div>
+
+        <!-- Muestra los comics -->
+        <div fxLayout="row wrap">
+            <div fxFlex="33%" fxFlex.md="33%" fxFlex.sm="50%" fxFlex.xs="100%"
+                fxLayout="column"
+                *ngFor="let comic of comicsAll" style="padding: 7px;">
+
+                <mat-card class="card-size" style="background: #f9f9f9bd; padding: 20px;">
+
+                    <img mat-card-image
+                        src="{{comic.thumbnail.path}}.{{comic.thumbnail.extension}}"
+                        alt="{{comic.name}}" (click)="openDetailComic(comic)">
+
+                    <mat-card-content>
+                        <mat-card-title>
+                            <span>{{comic.title}}</span>
+                        </mat-card-title>
+                    </mat-card-content>
+
+                    <mat-card-footer>
+                        <button (click)="openDetailComic(comic)" mat-button class="primary btnMore">VIEW MORE</button>
+                    </mat-card-footer>
+
+                </mat-card>
+
+            </div>
+        </div>
+    </div>
+</div>

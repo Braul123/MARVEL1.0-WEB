@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CharactersService }  from 'src/app/providers/characters/characters.service'
-import { ErrorServiceService } from 'src/app/providers/error-service/error-service.service'
+import { ErrorService } from 'src/app/providers/error-service/error-service.service'
 
 @Component({
   selector: 'app-characters',
@@ -16,7 +16,7 @@ export class CharactersComponent implements OnInit {
 
   constructor(
     private characterService : CharactersService,
-    private errorService: ErrorServiceService,
+    private errorService: ErrorService,
     
     ) {}
 

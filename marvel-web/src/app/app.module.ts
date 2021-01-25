@@ -16,10 +16,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { ComicsCharacterComponent } from '../app/components/comics-character/comics-character.component'
+
 const appRoutes : Routes = [
   {
-    path: '**',
+    path: '',
     redirectTo: '/characters',
     pathMatch: 'full'
   },
@@ -32,7 +32,7 @@ const appRoutes : Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent, 
+    NavbarComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

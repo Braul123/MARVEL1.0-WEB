@@ -1,0 +1,88 @@
+.header-page{
+    margin-bottom: 30px;
+  }
+
+  /* Si es vista mobile */
+  @media (max-width: 600px){
+  
+    mat-card{
+      height: auto !important;
+    }
+  
+    .isMobile{
+      margin-top: 50px !important;
+    }
+
+
+  /* 
+  **
+  * Estilos generales 
+  */
+    mat-card-image{
+      height: 525px !important;
+    }
+  }
+
+    mat-card-content{
+      height: 40px;
+    }
+
+    img.mat-card-image{
+      height: 550px;
+      cursor: pointer;
+    }
+
+    img.character{
+      width : 300px;
+      border-radius: 50%;
+    }
+  
+    span{
+      font-size: 19px;
+      font-weight: bold;
+      color: #292525c4;
+    }
+  
+    .typography{
+      color: #5f6565d9;
+      margin-top: 20px;
+    }
+  
+    .comics{
+      margin-top: 10px;
+    }
+  
+    .iconMoreComics{
+      font-size: 35px;
+      cursor: pointer;
+    }
+  
+    .iconMoreComics:hover{
+      color: red;
+    }
+  
+    .pointer{
+      cursor: pointer;
+    }
+  
+    .card-size {
+      max-width: 400px;
+      max-width: 500px;
+    }
+
+    .btnMore{
+      background-color: #212121;
+      color: white;
+      font-weight: bold;
+      width: 100%;
+    }
+  
+    .btnMore:hover{
+      background-color: red;
+    }
+
+    .subtitle{
+      margin-left: 10px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }

@@ -9,27 +9,32 @@ import { CharactersModule } from 'src/app/components/characters.module';
 })
 export class CharactersService {
 
-  //Key para acceder a marvel
+  //Key para acceder a marvel api cuenta 1 ... usar segunda cuenta en caso de limite de peticiones
   PUBLIC_KEY = '0cfe4d22a69532706e0e75c48a27ec1f';
   HASH = 'a3578f6656d351fa2116d522c7f2d242';
-  URL_API = `https:gateway.marvel.com/v1/public/characters?ts=1&apikey=${this.PUBLIC_KEY}&hash=${this.HASH}`;
+
+  //Segunda Cuenta ... Peticione limitadas
+  PUBLIC_KEY2 = 'e8bdf9e3c1fbdc0613bcbd15ec9848b6';
+  HASH2 = '9233432e3c656aa4469d4ec2b130ebdc';
+
+
+  CREDENTIALS = `?ts=1&apikey=${this.PUBLIC_KEY2}&hash=${this.HASH2}`
+  URL_API = `https:gateway.marvel.com/v1/public/characters`;
 
   constructor(private http: HttpClient) { }
 
+  // PARA CHARACTERS
 
   /**
    * @description Obtiene los personajes limitandolo al numero que desee el ususario
    */
-  getCharactersLimit(limit?: number | 10) {
+  getCharactersLimit(limit: number) {
 
     return new Promise((resolve, reject) => {
 
-      let apiUrl = this.URL_API;
+      let query = `${this.CREDENTIALS}&limit=${limit}`;
 
-      //Si hay limite de respuesta la agrega
-      if (limit) apiUrl += `&limit=${limit}`;
-
-      this.http.get(apiUrl).subscribe((data: any = []) => {
+      this.http.get(this.URL_API + query).subscribe((data: any = []) => {
         resolve(data.data)
       }, err => {
         reject(err);
@@ -39,50 +44,18 @@ export class CharactersService {
   }
 
 
-  /**
-   *@description Obtiene todos los personajes mediante un for
-   * ya que la api solo permite obtener 100 por cada petición
+   /**
+   * @description Obtiene un personaje por id
    */
-
-  async getCharactersAll() {
-
-    let offset = 0;
-    let results: any = [];
-    let charctersAll: any = [];
-
-    //itera la peticion para obtener mas de 100 registros
-    for (let i = 0; i <= 1; i++) {
-      results = await this.apiCharactersAll(offset);
-
-      //Concatena los arreglos obtenidos
-      charctersAll = charctersAll.concat(results);
-      offset += 100;
-    }
-
-    //Reutilizando variable results para guardar solo el nombre y id del personaje
-    results = [];
-    charctersAll.forEach(char => {
-      results.push({id: char.id, name: char.name})
-    });
-
-    //Convierte el arreglo en un JSON y lo guarda en el localStorage 
-    results = JSON.stringify(results)
-    localStorage.setItem('charactersAll', results);
-  }
-
-
-  /**
-   * @description Obtiene el maximo de personajes permitidos y los retorna a getCharactersAll()
-   */
-  apiCharactersAll(offset: number) {
+  getCharacterForId(id: string) {
 
     return new Promise((resolve, reject) => {
 
-      //modifica la ruta para enviar el limite y el punto de partida para traer los registros
-      let apiUrl = this.URL_API + `&limit=100&offset=${offset}`;
+      //Genera la query para consumir el endpoint
+      let query = `/${id}${this.CREDENTIALS}`;
 
-      this.http.get(apiUrl).subscribe((data: any = []) => {
-        resolve(data.data.results)
+      this.http.get(this.URL_API + query).subscribe((data: any = []) => {
+        resolve(data.data)
       }, err => {
         reject(err);
       })
@@ -90,5 +63,25 @@ export class CharactersService {
 
   }
 
+  //PPARA COMICS
+
+    /**
+   * @description Obtiene los comics relacionados a un personaje
+   */
+  getComicsLimit(limit: number | 10, id: string) {
+
+    return new Promise((resolve, reject) => {
+
+      //Genera la query para consumir el endpoint
+      let query = `/${id}/comics${this.CREDENTIALS}&limit=${limit}`;
+
+      this.http.get(this.URL_API + query).subscribe((data: any = []) => {
+        resolve(data.data)
+      }, err => {
+        reject(err);
+      })
+    })
+
+  }
 
 }
