@@ -56,3 +56,20 @@
   background-color: #202020; 
   height: 70px;
 }
+
+:host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {   
+  stroke: red;
+}
+
+.style-input-search{
+  width: 95%;
+  height: 32px; 
+  text-transform: capitalize;
+}
+
+form {
+  min-width: 80%;
+  max-width: 80%;
+}
+
+

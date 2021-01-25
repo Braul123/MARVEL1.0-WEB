@@ -1,21 +1,69 @@
-import { Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { FormControl } from "@angular/forms";
+import { startWith, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
+  control = new FormControl();
+  streets: any[] = [
+    {
+      id: 1011334,
+      name: "3-D Man"
+    },
+    {
+      id: 1017100,
+      name: "A-Bomb (HAS)"
+    },
+    {
+      id: 1009144,
+      name: "A.I.M."
+    },
+    {
+      id: 1010699,
+      name: "Aaron Stack"
+    },
+    {
+      id: 1009146,
+      name: "Abomination (Emil Blonsky)"
+    },
+    {
+      id: 1016823,
+      name: "Abomination (Ultimate)"
+    },
+    {
+      id: 1009148,
+      name: "Absorbing Man"
+    }
+  ];
+  
+  filteredStreets: Observable<string[]>;
+
+  constructor() {}
+
+  ngOnInit(){
+
+    this.filteredStreets = this.control.valueChanges.pipe(
+      startWith(''),
+      map((value: any) => {
+        return this._filter({name: value, id: ''})}
+      )
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  }
+
+  private _filter(value: any): any[] {
+    const filterValue = this._normalizeValue(value);
+    return this.streets.filter(street => this._normalizeValue(street).includes(filterValue));
+  }
+
+  private _normalizeValue(value: any): string {
+    if(value) return value.name.toLowerCase().replace(/\s/g, '');
+  }
 
 }

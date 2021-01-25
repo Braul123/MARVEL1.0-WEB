@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CharactersService }  from 'src/app/providers/characters/characters.service'
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorServiceService } from 'src/app/providers/error-service/error-service.service'
+
 @Component({
   selector: 'app-characters',
   templateUrl: './characters.component.html',
@@ -13,17 +13,12 @@ export class CharactersComponent implements OnInit {
   public charactersAll : any ;
   public limit : number = 10;
   public loading: boolean = false;
-  public messages : string = 'Hola Prueba'
 
   constructor(
     private characterService : CharactersService,
-    private messaje : MatSnackBar,
     private errorService: ErrorServiceService,
-    ) {
-
-      //Obtiene toods los personajes
-      this.characterService.getAllCharacters();
-    }
+    
+    ) {}
 
 
   //Inicia la carga de datos
@@ -35,12 +30,12 @@ export class CharactersComponent implements OnInit {
   async getAllCharacters () {
     this.loading = true;
     this.charactersAll = [];
-    await this.characterService.getCharacters(this.limit).then((data: any = []) =>{
+    await this.characterService.getCharactersLimit(this.limit).then((data: any = []) =>{
       this.charactersAll = data.results;
     
     //En caso de error - Lo muestra en pantalla
     }).catch( error =>{
-      this.capturarMessage('Error '+ error.error.code + ': ' + error.error.status, 'error-dialog');
+      this.capturarMessage('Error '+ error.error.code + ': ' + error.error.status, 'error-dialog', 3000);
     });
 
     //Detiene la barra progresiva
@@ -61,10 +56,12 @@ export class CharactersComponent implements OnInit {
   }
   
   //Envia el error al servicio de errores
-  capturarMessage(text: string, clase: string){
-    this.errorService.capturarMessage(text, clase);
+  capturarMessage(text: string, clase: string, duration: number){
+    this.errorService.capturarMessage(text, clase, duration);
     this.limit = 10; 
     this.getAllCharacters();
   }
+
+  
 
 }

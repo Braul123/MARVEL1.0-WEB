@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { CharactersModule } from 'src/app/components/characters.module';
 
 @Injectable({
   providedIn: 'root'
@@ -15,64 +16,78 @@ export class CharactersService {
 
   constructor(private http: HttpClient) { }
 
-  
 
-  getCharacters(limit? : number | 10){
+  /**
+   * @description Obtiene los personajes limitandolo al numero que desee el ususario
+   */
+  getCharactersLimit(limit?: number | 10) {
 
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve, reject) => {
 
       let apiUrl = this.URL_API;
-    
+
       //Si hay limite de respuesta la agrega
-      if(limit) apiUrl += `&limit=${limit}`;
-      
-      this.http.get(apiUrl).subscribe((data: any = [])=>{
+      if (limit) apiUrl += `&limit=${limit}`;
+
+      this.http.get(apiUrl).subscribe((data: any = []) => {
         resolve(data.data)
       }, err => {
         reject(err);
       })
     })
-    
+
   }
 
 
   /**
-   * 
    *@description Obtiene todos los personajes mediante un for
    * ya que la api solo permite obtener 100 por cada petición
    */
 
-  async getAllCharacters(){
+  async getCharactersAll() {
 
     let offset = 0;
-    let results : any = [];
-    let charctersAll : any = [];
+    let results: any = [];
+    let charctersAll: any = [];
 
     //itera la peticion para obtener mas de 100 registros
-    for(let i = 0; i <= 3; i++){
+    for (let i = 0; i <= 1; i++) {
       results = await this.apiCharactersAll(offset);
+
+      //Concatena los arreglos obtenidos
       charctersAll = charctersAll.concat(results);
-      offset+= 100;
+      offset += 100;
     }
 
+    //Reutilizando variable results para guardar solo el nombre y id del personaje
+    results = [];
+    charctersAll.forEach(char => {
+      results.push({id: char.id, name: char.name})
+    });
+
+    //Convierte el arreglo en un JSON y lo guarda en el localStorage 
+    results = JSON.stringify(results)
+    localStorage.setItem('charactersAll', results);
   }
 
 
-  
-  //Obtiene wel maximo de personajes permitidos 
-  apiCharactersAll(offset : number){
+  /**
+   * @description Obtiene el maximo de personajes permitidos y los retorna a getCharactersAll()
+   */
+  apiCharactersAll(offset: number) {
 
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve, reject) => {
 
+      //modifica la ruta para enviar el limite y el punto de partida para traer los registros
       let apiUrl = this.URL_API + `&limit=100&offset=${offset}`;
-    
-      this.http.get(apiUrl).subscribe((data: any = [])=>{
+
+      this.http.get(apiUrl).subscribe((data: any = []) => {
         resolve(data.data.results)
       }, err => {
         reject(err);
       })
     })
-    
+
   }
 
 

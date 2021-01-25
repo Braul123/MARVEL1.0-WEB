@@ -17,18 +17,26 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CardCharactersComponent } from '../components/card-characters/card-characters.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ComicsCharacterComponent } from './comics-character/comics-character.component';
 
 const routes = [
     {
         path     : '',
         component: CharactersComponent
+    },
+    {
+        path     : 'comics',
+        component: ComicsCharacterComponent
     }
 ];
 
 @NgModule({
     declarations: [
         CharactersComponent,
-        CardCharactersComponent
+        CardCharactersComponent,
+        ComicsCharacterComponent,
     ],
     imports     : [
         RouterModule.forChild(routes),
@@ -46,6 +54,9 @@ const routes = [
         MatProgressBarModule,
         MatSelectModule,
         MatSnackBarModule,
+        MatAutocompleteModule,
+        FormsModule,
+        ReactiveFormsModule
         
     ],
     providers: [

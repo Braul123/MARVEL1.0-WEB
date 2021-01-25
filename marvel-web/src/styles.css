@@ -2,6 +2,19 @@
 html, body { height: 100%;}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
 
+
+::-webkit-scrollbar {
+    width: 6px;
+    overflow-y: scroll;
+    background: rgba(128, 128, 128, 0.582);
+    box-shadow: inset 0 0 4px #707070;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(92, 92, 92);
+    border-radius: 10px;
+}
+
 /* Controla los estilos de los mensajes de usuario */
 .success-dialog {
     color: white !important;

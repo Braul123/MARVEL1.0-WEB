@@ -12,7 +12,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ComicsCharacterComponent } from '../app/components/comics-character/comics-character.component'
 const appRoutes : Routes = [
   {
     path: '**',
@@ -41,7 +45,12 @@ const appRoutes : Routes = [
     FlexLayoutModule,
     HttpClientModule,
     MatTooltipModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule ,
+    MatAutocompleteModule
   ],
   exports: [
     FlexLayoutModule,

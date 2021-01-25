@@ -10,10 +10,10 @@ export class ErrorServiceService {
     private message : MatSnackBar,
   ) { }
 
-  capturarMessage(messageIn: string, classPanel: string){
+  capturarMessage(messageIn: string, classPanel: string, duration? : number | 3000){
     this.message.open(messageIn, '',{
       panelClass: classPanel,
-      duration: 3000
+      duration: duration,
     })
   }
 }

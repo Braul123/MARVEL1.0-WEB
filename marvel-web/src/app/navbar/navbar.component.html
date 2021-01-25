@@ -1,4 +1,4 @@
-
+<!-- Contenedor de la pagina -->
 <mat-sidenav-container class="sidenav-container">
   
   <mat-sidenav-content>
@@ -10,21 +10,30 @@
         </a>
       </div>
 
+      <!-- Búsqueda -->
       <div class="seccion" fxFlex="60%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayoutAlign="center center">
-        <input type="text" style="min-width: 80%; height: 32px; text-transform: capitalize;" placeholder="Serch character...">
-        
+        <form>
+          <input type="text" placeholder="Serch character..." class="style-input-search"
+                 [formControl]="control"
+                 [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let street of filteredStreets | async" [value]="street.name">
+              {{street.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </form>
       </div>
+
+      <!-- Favoritos -->
       <div class="seccion" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayoutAlign="center center">
-        
-        <img  class="imgFavorites" src="../../assets/img/favourites.png" alt="favorites" style="cursor: pointer;"  matTooltip="Go Favorites"> 
-      
+        <img  class="imgFavorites" src="../../assets/img/favourites.png" alt="favorites" style="cursor: pointer;"  matTooltip="Go Favorites">
       </div>
+
     </mat-toolbar>
     <!-- Add Content Here -->
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
 
 
 
