@@ -13,6 +13,7 @@ export class CharactersComponent implements OnInit {
   public charactersAll : any ;
   public limit : number = 10;
   public loading: boolean = false;
+  public notFound : boolean = false;
 
   constructor(
     private characterService : CharactersService,
@@ -35,7 +36,13 @@ export class CharactersComponent implements OnInit {
     
     //En caso de error - Lo muestra en pantalla
     }).catch( error =>{
-      this.capturarMessage('Error '+ error.error.code + ': ' + error.error.status, 'error-dialog', 3000);
+      if(error.error.status){
+        this.capturarMessage('Error '+ error.error.code + ': ' + (error.error.status), 'error-dialog', 3000);
+      }
+      else if(error.error.message){
+        this.notFound = true;
+        this.errorService.capturarMessage(error.error.code + ': ' + (error.error.message), 'error-dialog', 3000)
+      }
     });
 
     //Detiene la barra progresiva

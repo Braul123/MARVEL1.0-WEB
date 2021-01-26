@@ -1,8 +1,18 @@
+
+
+
+
 <!-- Contenedor de la pagina -->
 <div *ngIf="loading">
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
-<div *ngIf="!loading" class="content">
+
+<!-- Si se eccedió el limite de peticiones muestra un mensaje -->
+<div *ngIf="notFound" class="content alert">
+    <app-not-found></app-not-found>
+</div>
+
+<div *ngIf="!loading && !notFound" class="content">
     
     <!-- Columna para el contenido -->
     <div fxFlex fxLayout="column">

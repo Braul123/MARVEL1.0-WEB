@@ -1,0 +1,19 @@
+.alert{
+    height: 100% !important;
+    text-align: center;
+}
+
+.typography{
+    color: #323535d9;
+  }
+
+  button.btn{
+    background-color:#212121;
+    color: white;
+    font-weight: bold;
+    width: 150px;
+  }
+
+  button.btn:hover{
+    background-color: red
+  }

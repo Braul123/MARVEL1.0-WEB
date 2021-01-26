@@ -24,6 +24,7 @@ import { ComicsCharacterComponent } from './comics-character/comics-character.co
 import { ModalDetalleComicComponent } from './modal-detalle-comic/modal-detalle-comic.component';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FavoritesComponent } from './favorites/favorites.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes = [
     {
@@ -47,6 +48,7 @@ const routes = [
         ComicsCharacterComponent,
         ModalDetalleComicComponent,
         FavoritesComponent,
+        NotFoundComponent,
     ],
     imports     : [
         RouterModule.forChild(routes),
