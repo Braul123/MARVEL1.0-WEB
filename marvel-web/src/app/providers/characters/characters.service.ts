@@ -62,7 +62,7 @@ export class CharactersService {
   
           //Se obtiene solo el nombre y el id del personaje
           data.data.results.forEach(char => {
-            resultsSelected.push({name: char.name, id: char.id})
+            resultsSelected.push({name: char.name, id: char.id, disable : false})
           });
   
           //Se borra la primera posición, está vacía

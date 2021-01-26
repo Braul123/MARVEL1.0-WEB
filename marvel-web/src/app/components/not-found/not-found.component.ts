@@ -13,6 +13,7 @@ export class NotFoundComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //Recarga la página
   changeServer(){
     location.reload();
   }

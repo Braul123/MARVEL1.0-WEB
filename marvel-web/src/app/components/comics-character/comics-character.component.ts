@@ -13,6 +13,7 @@ import { ControlFavoritesService } from '../../providers/control-favorites/contr
 })
 export class ComicsCharacterComponent implements OnInit {
 
+  //Modificables
   public loading  : boolean = false;
   public idCharacter : any; 
   public comicsAll : any; 
@@ -25,6 +26,8 @@ export class ComicsCharacterComponent implements OnInit {
     private dialog: MatDialog,
     private controlFavoritesService : ControlFavoritesService,
   ) {
+
+    //Obtiene el id del personaje que viene en la ruta
     if(this._route.snapshot.queryParams['id'] != undefined){
       this.idCharacter = this._route.snapshot.queryParams['id'];
     }
@@ -45,6 +48,7 @@ export class ComicsCharacterComponent implements OnInit {
       this.comicsAll = data.results;
       
     }).catch(error => {
+      //Si ocurrio un error lo muestra en pantalla
       this.capturarMessage('Error '+ error.error.code + ': ' + error.error.status, 'error-dialog', 3000);
       this.loading = false;
     })
@@ -53,6 +57,7 @@ export class ComicsCharacterComponent implements OnInit {
     await this.charactersService.getCharacterForId(this.idCharacter).then((data : any = []) => {
       this.character = data.results[0];
     }).catch(error => {
+      //Error
       this.capturarMessage('Error '+ error.error.code + ': ' + error.error.status, 'error-dialog', 3000);
       this.loading = false;
     })

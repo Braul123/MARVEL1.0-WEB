@@ -9,6 +9,7 @@ import { ErrorService } from 'src/app/providers/error-service/error-service.serv
 })
 export class CharactersComponent implements OnInit {
   
+  //Modificables
   seleccioneCantidad = [10, 20, 50, 80, 100];
   public charactersAll : any ;
   public limit : number = 10;
@@ -18,7 +19,6 @@ export class CharactersComponent implements OnInit {
   constructor(
     private characterService : CharactersService,
     private errorService: ErrorService,
-    
     ) {}
 
 
@@ -36,9 +36,11 @@ export class CharactersComponent implements OnInit {
     
     //En caso de error - Lo muestra en pantalla
     }).catch( error =>{
+      //Si es exceso de peticiones
       if(error.error.status){
         this.capturarMessage('Error '+ error.error.code + ': ' + (error.error.status), 'error-dialog', 3000);
       }
+      //Si es error por limite de datoa
       else if(error.error.message){
         this.notFound = true;
         this.errorService.capturarMessage(error.error.code + ': ' + (error.error.message), 'error-dialog', 3000)

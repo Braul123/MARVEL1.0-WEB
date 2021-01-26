@@ -40,14 +40,17 @@
 
                 <mat-card class="card-size" style="background: #f9f9f9bd; padding: 20px;">
 
+                    <!-- Imagen del comic -->
                     <img class="mat-image" mat-card-image
                         src="{{comic.thumbnail.path}}.{{comic.thumbnail.extension}}"
                         alt="{{comic.name}}" (click)="openDetailComic(comic)">
 
+                    <!-- Titulo -->
                     <mat-card-content>
                             <span>{{comic.title}}</span>
                     </mat-card-content> 
 
+                    <!-- Footer acciones -->
                     <mat-card-footer fxLayout="row" fxLayoutAlign="start center">
                         <button fxFlex="85%" (click)="openDetailComic(comic)" mat-button class="primary btnMore">VIEW MORE</button>
                         <div fxFlex="15%" fxLayoutAlign="center center">

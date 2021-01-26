@@ -19,8 +19,8 @@ export class CardCharactersComponent implements OnInit {
   }
 
 
-  goComics(id: any, name: string) : void{
-    
+  //Dirige a la pagina de comics
+  goComics(id: any) : void{
     this.router.navigate(['/characters/comics'], {queryParams : {id: id}});
   }
 

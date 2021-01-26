@@ -83,6 +83,7 @@ export class NavbarComponent implements OnInit {
       {
         name: 'Esperando resultados ...',
         id: '',
+        disable : true
       }
     ];
 

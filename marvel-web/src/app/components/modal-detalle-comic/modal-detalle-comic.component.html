@@ -4,6 +4,7 @@
         <div fxFlex="90">
             {{dataComic.title}}
         </div>
+        <!-- Boton para cerrar la modal -->
         <div fxFlex="10" fxLayoutAlign="end center">
             <img mat-dialog-close fxLayoutAlign="end center"
                 src="../../../assets/img/btn-close.png" class="icon-close"
@@ -28,15 +29,18 @@
 
 <!-- Acciones -->
 <mat-dialog-actions align="end" style="margin-top: 20px;">
+    <!-- Añadir a fav -->
     <button *ngIf="!data.isFav" mat-dialog-close mat-button class="action-fav" (click)="addFavorites(dataComic)">
         <img src="../../../assets/img/btn-favourites-primary.png"
             alt="favorites">
         &nbsp; ADD TO FAVORITES
     </button>
+    <!-- Quitar de fav -->
     <button *ngIf="data.isFav"  mat-button class="action-fav" (click)="removeFavorite(dataComic)" [mat-dialog-close]="true">
         <mat-icon>delete</mat-icon>
         &nbsp; REMOVE FROM FAVORITES
     </button>
+    <!-- Comprar -->
     <button mat-button class="action-buy" mat-dialog-close (click)="buyComic()">
         <img src="../../../assets/img/shopping-cart-primary.png"
             alt="favorites">

@@ -2,8 +2,8 @@
 <div *ngIf="loading">
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
-<div *ngIf="!loading" class="content">
 
+<div *ngIf="!loading" class="content">
     <!-- Columna para el contenido -->
     <div fxFlex fxLayout="column">
 
@@ -60,16 +60,19 @@
 
                 <mat-card class="card-size" style="background: #f9f9f9bd; padding: 20px;">
 
+                    <!-- Imagen -->
                     <img mat-card-image
                         src="{{comic.thumbnail.path}}.{{comic.thumbnail.extension}}"
                         alt="{{comic.name}}" (click)="openDetailComic(comic)">
 
+                    <!-- Titulo del comic -->
                     <mat-card-content>
                         <mat-card-title>
                             <span>{{comic.title}}</span>
                         </mat-card-title>
                     </mat-card-content> 
 
+                    <!-- Footer acciones -->
                     <mat-card-footer fxLayout="row" fxLayoutAlign="start center">
                         <button fxFlex="85%" (click)="openDetailComic(comic)" mat-button class="primary btnMore">VIEW MORE</button>
                         <div fxFlex="15%" fxLayoutAlign="center center">
