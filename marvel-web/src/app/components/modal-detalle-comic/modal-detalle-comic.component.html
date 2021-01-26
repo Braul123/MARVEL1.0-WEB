@@ -1,33 +1,45 @@
+<!-- Titulo -->
 <h1 mat-dialog-title>
     <div fxLayout="row" fxLayoutAlign="start center">
         <div fxFlex="90">
-            {{data.title}}
+            {{dataComic.title}}
         </div>
         <div fxFlex="10" fxLayoutAlign="end center">
-            <img style="cursor: pointer;" mat-dialog-close fxLayoutAlign="end center" src="../../../assets/img/btn-close.png" class="btn-close" alt="">
+            <img mat-dialog-close fxLayoutAlign="end center"
+                src="../../../assets/img/btn-close.png" class="icon-close"
+                alt="">
         </div>
     </div>
-    
+
 </h1>
 
-<h1 mat-dialog-title></h1>
-
-
-    <div fxLayout="row wrap" mat-dialog-content>
-        <div fxFlex="30%" fxFlex.sm="50%" fxFlex.xs="100%">
-            <img class="character" src="{{data.thumbnail.path}}.{{data.thumbnail.extension}}" alt="characters">
-        </div>
-        <div fxFlex="50%" fxFlex.sm="50%" fxFlex.xs="100%" fxLayoutAlign="center start" fxLayout="column">
-            <span>DESCRIPTION ... </span>
-            <p class="typography">{{data.description? (data.description) : 'No description' }}</p>
-        </div>
+<!-- Imagen y descripcion del comic -->
+<div fxLayout="row wrap" mat-dialog-content>
+    <div fxFlex="40%" fxFlex.sm="50%" fxFlex.xs="100%">
+        <img class="character"
+            src="{{dataComic.thumbnail.path}}.{{dataComic.thumbnail.extension}}"
+            alt="characters">
     </div>
+    <div fxFlex="50%" fxFlex.sm="50%" fxFlex.xs="100%" fxLayoutAlign="center start" fxLayout="column">
+        <span>DESCRIPTION ... </span>
+        <p class="typography">{{dataComic.description? (dataComic.description) : 'No description' }}</p>
+    </div>
+</div>
 
 <!-- Acciones -->
-<mat-dialog-actions align="end">
-  <button mat-button class="primary">
-      <mat-icon>close</mat-icon>
-      Cerrar
-  </button> 
-  <button mat-button class="primary" [mat-dialog-close]="" cdkFocusInitial>Ok</button>
+<mat-dialog-actions align="end" style="margin-top: 20px;">
+    <button *ngIf="!data.isFav" mat-dialog-close mat-button class="action-fav" (click)="addFavorites(dataComic)">
+        <img src="../../../assets/img/btn-favourites-primary.png"
+            alt="favorites">
+        &nbsp; ADD TO FAVORITES
+    </button>
+    <button *ngIf="data.isFav"  mat-button class="action-fav" (click)="removeFavorite(dataComic)" [mat-dialog-close]="true">
+        <mat-icon>delete</mat-icon>
+        &nbsp; REMOVE FROM FAVORITES
+    </button>
+    <button mat-button class="action-buy" mat-dialog-close (click)="buyComic()">
+        <img src="../../../assets/img/shopping-cart-primary.png"
+            alt="favorites">
+        &nbsp; BUY FOR ${{dataComic.prices[0]?.price}}
+    </button>
 </mat-dialog-actions>

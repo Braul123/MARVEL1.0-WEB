@@ -10,7 +10,7 @@
         <!-- titulo del componente -->
         <div class="header-page" fxLayout="row wrap">
             <div fxFlex="50%" fxFlex.sm="50%" fxLayoutAlign="start center">
-                <img src="../../../assets/img/characters.png" alt="characters"
+                <img src="../../../assets/img/characters.png" alt="comics"
                     width="67px">
                 <mat-card-title>Detail of {{character.name}}</mat-card-title>
             </div>
@@ -18,11 +18,11 @@
             <!-- Espacio para la cantidad de registros a visualizar -->
             <div fxFlex="49%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayoutAlign="end center">
                 <mat-icon>arrow_left</mat-icon>
-               <a  href="/characters"> Return to characters</a>
+               <a href="/characters"><span class="return">Return to characters</span></a>
             </div>
         </div>
 
-          <!-- titulo del componente -->
+          <!-- Info del personaje -->
           <div class="header-page" fxLayout="row wrap">
             <div fxFlex="25%" fxFlex.sm="50%" fxLayoutAlign="start center">
                 <img class="character" src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}" alt="characters">
@@ -33,9 +33,11 @@
             <div class="isMobile" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayoutAlign="center start" fxLayout="column">
                 <span>{{character.name}}</span>
                 <p class="typography">
-                    {{character.description? (character.description | slice:1:217) + '...' : 'No description' }}    
+                    {{character.description? (character.description) : 'No description' }}    
                 </p>
-                <button mat-button class="primary">FULL DETAIL</button>
+                <a href="{{character.urls[0].url}}" target="_blank">
+                    <button mat-button class="primary">FULL DETAIL</button>
+                </a>
             </div>
         </div>
 
@@ -52,7 +54,7 @@
 
         <!-- Muestra los comics -->
         <div fxLayout="row wrap">
-            <div fxFlex="33%" fxFlex.md="33%" fxFlex.sm="50%" fxFlex.xs="100%"
+            <div fxFlex="25%" fxFlex.md="33%" fxFlex.sm="50%" fxFlex.xs="100%"
                 fxLayout="column"
                 *ngFor="let comic of comicsAll" style="padding: 7px;">
 
@@ -66,10 +68,14 @@
                         <mat-card-title>
                             <span>{{comic.title}}</span>
                         </mat-card-title>
-                    </mat-card-content>
+                    </mat-card-content> 
 
-                    <mat-card-footer>
-                        <button (click)="openDetailComic(comic)" mat-button class="primary btnMore">VIEW MORE</button>
+                    <mat-card-footer fxLayout="row" fxLayoutAlign="start center">
+                        <button fxFlex="85%" (click)="openDetailComic(comic)" mat-button class="primary btnMore">VIEW MORE</button>
+                        <div fxFlex="15%" fxLayoutAlign="center center">
+                            <mat-icon (click)="addFavorites(comic)" class="icon-fav">favorite</mat-icon>
+                        </div>
+
                     </mat-card-footer>
 
                 </mat-card>

@@ -43,6 +43,24 @@ export class CharactersService {
 
   }
 
+    /**
+   * @description Obtiene los personajes limitandolo al numero que desee el ususario
+   */
+  getCharacterForName(name: string) {
+
+    return new Promise((resolve, reject) => {
+
+      let query = `${this.CREDENTIALS}&nameStartsWith=${name}&limit=10`;
+
+      this.http.get(this.URL_API + query).subscribe((data: any = []) => {
+        resolve(data.data)
+      }, err => {
+        reject(err);
+      })
+    })
+
+  }
+
 
    /**
    * @description Obtiene un personaje por id

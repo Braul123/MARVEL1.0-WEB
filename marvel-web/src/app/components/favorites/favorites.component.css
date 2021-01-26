@@ -1,0 +1,85 @@
+.header-page{
+    margin-bottom: 30px;
+  }
+
+
+  /* Si es vista mobile */
+  @media (max-width: 600px){
+  
+    mat-card{
+      height: auto !important;
+    }
+  
+    mat-card-image{
+      height: 525px !important;
+    }
+  }
+
+  img.mat-image{
+    height: 525px;
+    cursor: pointer;
+  }
+
+  mat-card-content{
+    height: 50px;
+  }
+
+  .isTtitle{
+    margin-top: 5px !important;
+  }
+
+  .card-size {
+    max-width: 400px;
+    max-width: 500px;
+  }
+
+  .btnMore{
+    background-color: #212121;
+    color: white;
+    font-weight: bold;
+    width: 70%;
+  }
+
+  .btnMore:hover{
+    background-color: red;
+  }
+
+  .icon-fav{
+    font-size: 35px;
+    color: darkgrey;
+  }
+
+  .icon-fav:hover{
+    color: red;
+    cursor: pointer;
+  }
+
+  .alert{
+      height: 100% !important;
+      text-align: center;
+  }
+
+  .typography{
+    color: #323535d9;
+  }
+
+  button.btn{
+    background-color:#212121;
+    color: white;
+    font-weight: bold;
+    width: 150px;
+  }
+
+  button.btn:hover{
+    background-color: red
+  }
+
+  span{
+    font-size: 19px;
+    font-weight: bold;
+    color: #292525c4;
+  }
+
+  span.return:hover{
+    color: red;
+  }

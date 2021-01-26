@@ -1,4 +1,4 @@
- <!-- Ordena los prsonajes en filas de dos -->
+ <!-- Ordena los pesonajes en filas de dos -->
  <div fxLayout="row wrap">
     <div fxFlex="50%" fxFlex.md="33%" fxFlex.sm="50%" fxFlex.xs="100%" fxLayout="column"
     *ngFor="let character of charactersAll" style="padding: 7px;">
@@ -25,7 +25,7 @@
                 </div>
                 <div style="padding: 10px;">
                     <div class="typography">
-                            {{character.description? (character.description | slice:1:217) + '...' : 'No description' }}
+                            {{character.description? (character.description | slice:0:217) + '...' : 'No description' }}
                     </div>
                 </div>
                 <!-- Botón de ver más -->
@@ -42,6 +42,7 @@
                         <p class="typography comics">
                             This character appears in {{character.comics.available}} comics, including: <br>
                             <mat-icon (click)="goComics(character.id)" matTooltip="view more" class="iconMoreComics">arrow_right_alt</mat-icon>
+
                         </p>
                 </div>
 

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ErrorService } from 'src/app/providers/error-service/error-service.service';
 import { ModalDetalleComicComponent } from '../modal-detalle-comic/modal-detalle-comic.component'
 import { MatDialog } from '@angular/material/dialog';
+import { ControlFavoritesService } from '../../providers/control-favorites/control-favorites.service';
 
 @Component({
   selector: 'app-comics-character',
@@ -22,6 +23,7 @@ export class ComicsCharacterComponent implements OnInit {
     private _route : ActivatedRoute,
     private errorService: ErrorService,
     private dialog: MatDialog,
+    private controlFavoritesService : ControlFavoritesService,
   ) {
     if(this._route.snapshot.queryParams['id'] != undefined){
       this.idCharacter = this._route.snapshot.queryParams['id'];
@@ -50,7 +52,6 @@ export class ComicsCharacterComponent implements OnInit {
     //Obtiene la informacion del personaje
     await this.charactersService.getCharacterForId(this.idCharacter).then((data : any = []) => {
       this.character = data.results[0];
-      console.log(this.character)
     }).catch(error => {
       this.capturarMessage('Error '+ error.error.code + ': ' + error.error.status, 'error-dialog', 3000);
       this.loading = false;
@@ -64,10 +65,18 @@ export class ComicsCharacterComponent implements OnInit {
   openDetailComic(data: any){
     this.dialog.open(ModalDetalleComicComponent, {
       
-      data : data,
+      data : {
+        data,
+        isFav: false,
+      },
       height: 'auto',
-      width: 'auto'
+      width: '80%'
     })
+  }
+
+  //Envia el comic al servicio para agregarlo a favoritos
+  addFavorites(data: any){
+    this.controlFavoritesService.addToFavorites(data);
   }
 
   //Envia el error al servicio de errores

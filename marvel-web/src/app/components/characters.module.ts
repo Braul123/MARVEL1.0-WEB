@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { CharactersComponent } from '../components/characters/characters.component';
 import { CharactersService } from 'src/app/providers/characters/characters.service';
+import { ControlFavoritesService } from 'src/app/providers/control-favorites/control-favorites.service';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
@@ -22,6 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComicsCharacterComponent } from './comics-character/comics-character.component';
 import { ModalDetalleComicComponent } from './modal-detalle-comic/modal-detalle-comic.component';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 const routes = [
     {
@@ -31,6 +33,10 @@ const routes = [
     {
         path     : 'comics',
         component: ComicsCharacterComponent
+    },
+    {
+        path     : 'favorites',
+        component: FavoritesComponent
     }
 ];
 
@@ -40,6 +46,7 @@ const routes = [
         CardCharactersComponent,
         ComicsCharacterComponent,
         ModalDetalleComicComponent,
+        FavoritesComponent,
     ],
     imports     : [
         RouterModule.forChild(routes),
@@ -66,6 +73,7 @@ const routes = [
     ],
     providers: [
         CharactersService,
+        ControlFavoritesService,
         { provide: MAT_DIALOG_DATA, useValue: {} }
     ],
     

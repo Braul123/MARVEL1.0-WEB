@@ -1,0 +1,63 @@
+<!-- Contenedor de la pagina -->
+<div *ngIf="loading">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<!-- Si no hay comics muestra este mensaje -->
+<div class="content alert" *ngIf="notComics" fxLayout="column" fxLayoutAlign="start center">
+    <img src="../../../assets/img/iron-man.png" width="300px" alt=""> <br>
+    <h1 class="typography">It seems you don't have favorites, start adding now</h1>
+    <button routerLink="/characters" mat-button class="btn">Go!!</button>
+</div>  
+
+<!-- Si hay comics -->
+<div *ngIf="!loading && !notComics" class="content">
+
+    <!-- Columna para el contenido -->
+    <div fxFlex fxLayout="column">
+
+        <!-- titulo del componente -->
+        <div class="header-page" fxLayout="row wrap">
+            <div fxFlex="50%" fxFlex.sm="50%" fxLayoutAlign="start center">
+                <img src="../../../assets/img/favourites.png" alt="favorites"
+                    width="53px"> &nbsp;&nbsp;
+                <mat-card-title class="isTtitle">Your favorites</mat-card-title>
+            </div>
+
+            <!-- Espacio para la cantidad de registros a visualizar -->
+            <div fxFlex="49%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayoutAlign="end center">
+                <mat-icon>arrow_left</mat-icon>
+               <a  href="/characters"><span class="return">Return to characters</span></a>
+            </div>
+        </div>
+        
+
+        <!-- Muestra los comics -->
+        <div fxLayout="row wrap">
+            <div fxFlex="25%" fxFlex.md="33%" fxFlex.sm="50%" fxFlex.xs="100%"
+                fxLayout="column"
+                *ngFor="let comic of comicsAll" style="padding: 7px;">
+
+                <mat-card class="card-size" style="background: #f9f9f9bd; padding: 20px;">
+
+                    <img class="mat-image" mat-card-image
+                        src="{{comic.thumbnail.path}}.{{comic.thumbnail.extension}}"
+                        alt="{{comic.name}}" (click)="openDetailComic(comic)">
+
+                    <mat-card-content>
+                            <span>{{comic.title}}</span>
+                    </mat-card-content> 
+
+                    <mat-card-footer fxLayout="row" fxLayoutAlign="start center">
+                        <button fxFlex="85%" (click)="openDetailComic(comic)" mat-button class="primary btnMore">VIEW MORE</button>
+                        <div fxFlex="15%" fxLayoutAlign="center center">
+                            <mat-icon (click)="removeFavorite(comic)" class="icon-fav">delete</mat-icon>
+                        </div>
+                    </mat-card-footer>
+
+                </mat-card>
+
+            </div>
+        </div>
+    </div>
+</div>

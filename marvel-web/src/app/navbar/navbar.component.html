@@ -16,23 +16,26 @@
           <input type="text" placeholder="Serch character..." class="style-input-search"
                  [formControl]="control"
                  [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let street of filteredStreets | async" [value]="street.name">
+          <mat-autocomplete #auto="matAutocomplete" >
+            <mat-option  *ngFor="let street of filteredStreets | async" [value]="street.name"
+            (onSelectionChange)="selected(street)">
               {{street.name}}
             </mat-option>
           </mat-autocomplete>
         </form>
-      </div>
 
+      </div>
       <!-- Favoritos -->
       <div class="seccion" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayoutAlign="center center">
-        <img  class="imgFavorites" src="../../assets/img/favourites.png" alt="favorites" style="cursor: pointer;"  matTooltip="Go Favorites">
+        <img class="imgFavorites" (click)="goFavorites()" 
+        src="../../assets/img/favourites.png"
+        alt="favorites" 
+        matTooltip="Go Favorites">
       </div>
 
     </mat-toolbar>
-    <!-- Add Content Here -->
     <router-outlet></router-outlet>
-  </mat-sidenav-content>
+    </mat-sidenav-content>
 </mat-sidenav-container>
 
 

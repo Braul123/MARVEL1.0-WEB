@@ -62,3 +62,8 @@ button.primary{
     color: red !important;
     font-weight: bold;
 }
+
+a{
+    text-decoration: none;
+}
+

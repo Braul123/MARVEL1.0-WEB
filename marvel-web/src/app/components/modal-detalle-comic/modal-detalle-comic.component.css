@@ -22,7 +22,24 @@ span{
     color: #292525c4;
 }
 
-img.btn-close{
+button{
+    width: 274px;
+    height: 50px;
+    font-weight: bold;
+}
+
+button.action-fav{
+    background-color:#292525c4;
+    color: red;
+}
+
+img.icon-close{
     width: "10px" !important;
-    height: "10px" !important
+    height: "10px" !important;
+    cursor: pointer;
+}
+
+
+button.action-buy{
+    background-color: #dcdcdc
 }

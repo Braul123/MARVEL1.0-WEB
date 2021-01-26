@@ -12,17 +12,17 @@
     .isMobile{
       margin-top: 50px !important;
     }
-
-
-  /* 
-  **
-  * Estilos generales 
-  */
+    
     mat-card-image{
       height: 525px !important;
     }
   }
 
+   /* 
+  **
+  * Estilos generales 
+  */
+  
     mat-card-content{
       height: 40px;
     }
@@ -41,6 +41,10 @@
       font-size: 19px;
       font-weight: bold;
       color: #292525c4;
+    }
+
+    span.return:hover{
+      color: red;
     }
   
     .typography{
@@ -74,7 +78,7 @@
       background-color: #212121;
       color: white;
       font-weight: bold;
-      width: 100%;
+      width: 70%;
     }
   
     .btnMore:hover{
@@ -85,4 +89,14 @@
       margin-left: 10px;
       margin-top: 20px;
       margin-bottom: 20px;
+    }
+
+    .icon-fav{
+      font-size: 35px;
+      color: darkgrey;
+    }
+
+    .icon-fav:hover{
+      color: red;
+      cursor: pointer;
     }

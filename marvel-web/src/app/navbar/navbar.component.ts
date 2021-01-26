@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl } from "@angular/forms";
 import { startWith, map } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CharactersService } from 'src/app/providers/characters/characters.service';
 
 @Component({
   selector: 'app-navbar',
@@ -44,7 +46,10 @@ export class NavbarComponent implements OnInit {
   
   filteredStreets: Observable<string[]>;
 
-  constructor() {}
+  constructor(
+    private router : Router,
+    private charactersService: CharactersService,
+  ) {}
 
   ngOnInit(){
 
@@ -65,5 +70,18 @@ export class NavbarComponent implements OnInit {
   private _normalizeValue(value: any): string {
     if(value) return value.name.toLowerCase().replace(/\s/g, '');
   }
+
+  goFavorites(){
+    this.router.navigate(['/characters/favorites']);
+  }
+
+  selected(event: any){
+    // this.router.navigate([``], {queryParams: {id : event.id}});
+    this.router.navigate(['/characters/comics'], {queryParams: {id : event.id}})
+    .then(() => {
+      window.location.reload();
+  });
+  }
+
 
 }

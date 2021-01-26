@@ -50,7 +50,7 @@ const appRoutes : Routes = [
     ReactiveFormsModule,
     MatProgressBarModule,
     MatProgressSpinnerModule ,
-    MatAutocompleteModule
+    MatAutocompleteModule,
   ],
   exports: [
     FlexLayoutModule,
