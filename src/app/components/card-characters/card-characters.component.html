@@ -1,35 +1,34 @@
  <!-- Ordena los pesonajes en filas de dos -->
  <div fxLayout="row wrap">
-    <div fxFlex="50%" fxFlex.md="33%" fxFlex.sm="50%" fxFlex.xs="100%" fxLayout="column"
+    <div fxFlex="50%" fxFlex.md="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxLayout="column"
     *ngFor="let character of charactersAll" style="padding: 7px;">
 
     <!-- Agregar el card que contiene cada personaje -->
-    <mat-card style="background: #f9f9f9bd;" fxLayout="column">
+    <mat-card fxLayout="column" (click)="goComics(character.id)" class="pointer">
+        <div class="super-div"></div>
 
         <!-- Pone dos columnas en una fila -->
-        <div fxFlex FxLayout="row wrap" class="isMobile">
+        <div fxLayout="row wrap" class="isMobile">
 
              <!-- Para la imagen del personaje y comics relacionados -->
-            <div fxFlex="40%" fxLayout="column">
-                <div>
-                    <img (click)="goComics(character.id)" class="pointer" mat-card-image src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}" alt="{{character.name}}">
-                </div>
+            <div fxFlex="40%" fxFlex.sm="50" fxFlex.xs="35" fxLayout="column">
+                <img class="pointer" mat-card-image src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}" alt="{{character.name}}">
             </div>
 
             <!-- Para el nombre y la descripcion -->
-            <div fxFlex="60%" fxLayout="column">
+            <div fxFlex="60%" fxFlex.xs="65" fxFlex.sm="50" fxLayout="column">
                 <div>
                     <mat-card-title>
                         {{character.name | uppercase}}
                     </mat-card-title>
                 </div>
-                <div style="padding: 10px;">
+                <div style="padding: 10px 0px 10px 0px">
                     <div class="typography">
-                            {{character.description? (character.description | slice:0:217) + '...' : 'No description' }}
+                        {{character.description? (character.description | slice:0:217) + '...' : 'No description' }}
                     </div>
                 </div>
                 <!-- Botón de ver más -->
-                <button mat-button class="primary" (click)="goComics(character.id)">VIEW MORE</button>
+                <button mat-button class="primary focus" (click)="goComics(character.id)">VIEW MORE</button>
             </div>
 
         </div>
@@ -37,7 +36,7 @@
          <!-- Seccion para comics -->
          <div fxFlex FxLayout="row wrap">
             <div *ngIf="character.comics.available > 0;">
-                <div fxFlex="40%">
+                <div fxFlex="40%" fxFlex.xs="100">
                     <span class="typography">Related Comics </span>
                         <p class="typography comics">
                             This character appears in {{character.comics.available}} comics, including: <br>
@@ -47,7 +46,7 @@
                 </div>
 
                <!-- Para el nombre y la descripcion -->
-                    <div fxFlex="60%">
+                    <div fxFlex="60%" fxHide.xs>
                         <ul class="typography" >
                             <li>{{character?.comics?.items[0]?.name}}</li>
                             <li *ngIf="character?.comics?.items[1]">{{character?.comics?.items[1]?.name}}</li>

@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonModule } from '@angular/material/button';
 
 const appRoutes : Routes = [
   {
@@ -51,6 +52,7 @@ const appRoutes : Routes = [
     MatProgressBarModule,
     MatProgressSpinnerModule ,
     MatAutocompleteModule,
+    MatButtonModule,
   ],
   exports: [
     FlexLayoutModule,

@@ -18,14 +18,14 @@
 
         <!-- titulo del componente -->
         <div class="header-page" fxLayout="row wrap">
-            <div fxFlex="50%" fxFlex.sm="50%" fxLayoutAlign="start center">
+            <div fxFlex="50%" fxFlex.sm="50%" fxFlex.xs="100" fxLayoutAlign="start center">
                 <img src="../../../assets/img/favourites.png" alt="favorites"
                     width="53px"> &nbsp;&nbsp;
-                <mat-card-title class="isTtitle">Your favorites</mat-card-title>
+                <mat-card-title class="isTtitle">Your favorite comics</mat-card-title>
             </div>
 
             <!-- Espacio para la cantidad de registros a visualizar -->
-            <div fxFlex="49%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayoutAlign="end center">
+            <div fxFlex="49%" fxHide.xs fxFlex.xs="100%" fxFlex.sm="50%" fxLayoutAlign="end center">
                 <mat-icon>arrow_left</mat-icon>
                <a  href="/characters"><span class="return">Return to characters</span></a>
             </div>
@@ -36,7 +36,7 @@
         <div fxLayout="row wrap">
             <div fxFlex="25%" fxFlex.md="33%" fxFlex.sm="50%" fxFlex.xs="100%"
                 fxLayout="column"
-                *ngFor="let comic of comicsAll" style="padding: 7px;">
+                *ngFor="let comic of comicsAll" style="padding: 7px; margin-bottom: 25px;">
 
                 <mat-card class="card-size" style="background: #f9f9f9bd; padding: 20px;">
 

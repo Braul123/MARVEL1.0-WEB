@@ -16,7 +16,7 @@ export class ControlFavoritesService {
   addToFavorites(data? : any) : void {
 
     //Obtiene los datos que hay en el localStorage
-    let isLength: any = this.hayFavorites();
+    let isLength: any = this.getFavorites();
 
     //Inicializa el arreglo para poder agregar datos
     let favorites : any = [{ name: 'initial',value: 'initial'}]
@@ -62,7 +62,7 @@ export class ControlFavoritesService {
 
   removeFavorite(data : any){ 
 
-    let favorites = this.hayFavorites();
+    let favorites = this.getFavorites();
     let position : number; 
 
     if(favorites.length == 1){
@@ -83,7 +83,7 @@ export class ControlFavoritesService {
   }
 
   //Devuelve los datos que hat en el localStorage
-  hayFavorites() {
+  getFavorites() {
     return JSON.parse(localStorage.getItem('favorites'));
   }
 

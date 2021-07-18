@@ -1,7 +1,5 @@
 
 
-
-
 <!-- Contenedor de la pagina -->
 <div *ngIf="loading">
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
@@ -12,14 +10,14 @@
     <app-not-found></app-not-found>
 </div>
 
-<div *ngIf="!loading && !notFound" class="content">
+<div *ngIf="!notFound" class="content">
     
     <!-- Columna para el contenido -->
     <div fxFlex fxLayout="column">
 
         <!-- titulo del componente -->
         <div class="header-page" fxLayout="row wrap">
-            <div fxFlex="50%" fxFlex.sm="50%" fxLayoutAlign="start center">
+            <div fxFlex="50%" fxFlex.sm="50%" fxFlex.xs="100" fxLayoutAlign="start center">
                 <img src="../../../assets/img/characters.png" alt="characters" width="67px">
                 <mat-card-title>Marvel Characters</mat-card-title>
             </div>
@@ -31,27 +29,27 @@
                     <mat-select (selectionChange)="establecerCantRegistros($event.value)">
                         <mat-option *ngFor="let c of seleccioneCantidad" [value]="c">{{c}} </mat-option>
                     </mat-select>
-                    <mat-icon matSuffix>keyboard_arrow_down</mat-icon>
+                    <!-- <mat-icon matSuffix>keyboard_arrow_down</mat-icon> -->
                 </mat-form-field>
             </div>
         </div>
 
         <!-- Muestra los personajes divididos por un card -->
-        <app-card-characters [charactersAll]="charactersAll"></app-card-characters>
+        <app-card-characters *ngIf="totalRegistros > 0" [charactersAll]="charactersAll"></app-card-characters>
 
 
         <!-- Mostrar mas resultados -->
-        <div fxLayout="column">
+        <div fxLayout="column" *ngIf="totalRegistros > 0" id="actions">
             <div fxFlex="100%" fxFlex.sm="50%" fxFlex.xs="100%" fxLayoutAlign="center center">
-                <button mat-button class="primary btnMore" (click)="establecerCantRegistros(10 + limit)">VIEW MORE CHARACTERS</button>
+                <button mat-button class="primary btnMore" (click)="establecerCantRegistros(limit + 6, true)">VIEW MORE CHARACTERS</button>
             </div>
 
             <!-- Registros visualizados -->
-            <p class="typography noMargin" fxFlex="100%" fxFlex.sm="50%" fxFlex.xs="100%" fxLayoutAlign="center center">{{charactersAll.length}}/100</p>
+            <p class="typography noMargin" fxFlex="100%" fxFlex.sm="50%" fxFlex.xs="100%" fxLayoutAlign="center center">{{charactersAll.length}}/{{totalRegistros}}</p>
             <!-- Mostrar menos -->
 
             <div *ngIf="limit > 10" fxFlex="100%" fxFlex.sm="50%" fxFlex.xs="100%" fxLayoutAlign="center center">
-                <button mat-button class="btnMore" (click)="establecerCantRegistros(limit -10)">SHOW FEWER CHARACTERS</button>
+                <button mat-button class="btnMore" (click)="establecerCantRegistros(limit -6, true)">SHOW FEWER CHARACTERS</button>
             </div>
         </div>
     </div>

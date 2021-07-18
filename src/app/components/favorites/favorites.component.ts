@@ -29,7 +29,7 @@ export class FavoritesComponent implements OnInit {
   //Obtiene los comics favoritos
   async initData(){
     this.loading = true;
-    this.comicsAll = await this.controlFavoritesService.hayFavorites();
+    this.comicsAll = await this.controlFavoritesService.getFavorites();
 
     //Si no hay comics muestra un mensaje
     if(this.comicsAll == null) this.notComics = true;

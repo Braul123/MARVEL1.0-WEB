@@ -5,7 +5,6 @@ import { ErrorService } from 'src/app/providers/error-service/error-service.serv
 import { ModalDetalleComicComponent } from '../modal-detalle-comic/modal-detalle-comic.component'
 import { MatDialog } from '@angular/material/dialog';
 import { ControlFavoritesService } from '../../providers/control-favorites/control-favorites.service';
-
 @Component({
   selector: 'app-comics-character',
   templateUrl: './comics-character.component.html',
@@ -18,6 +17,7 @@ export class ComicsCharacterComponent implements OnInit {
   public idCharacter : any; 
   public comicsAll : any; 
   public character : any;
+  private favorites: any;
 
   constructor(
     private charactersService : CharactersService,
@@ -36,6 +36,7 @@ export class ComicsCharacterComponent implements OnInit {
   //Carga los datoa
   ngOnInit() {
     this.getComics();
+    this.favorites = this.controlFavoritesService.getFavorites();
   }
 
   //Obtiene todos los comics relacionados a un personaje
@@ -46,6 +47,16 @@ export class ComicsCharacterComponent implements OnInit {
     //Obtiene los comis
     await this.charactersService.getComicsLimit(100, this.idCharacter).then((data : any = []) => {
       this.comicsAll = data.results;
+
+      // Si tiene favoritos en la lista los identifica
+      this.comicsAll.forEach((element) => {
+        element.isFavorite = false;
+        this.favorites.forEach((fav) => {
+          if (fav.id && fav.id === element.id) {
+            element.isFavorite = true;
+          }
+        })
+      });
       
     }).catch(error => {
       //Si ocurrio un error lo muestra en pantalla

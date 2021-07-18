@@ -95,5 +95,8 @@ export class NavbarComponent implements OnInit {
     );
   }
 
-
+  toHeader(): void {
+    const header = document.getElementById('header');
+    header.scrollIntoView({behavior: 'smooth'});
+  }
 }

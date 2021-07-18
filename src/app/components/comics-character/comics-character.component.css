@@ -72,6 +72,11 @@
     .card-size {
       max-width: 400px;
       max-width: 500px;
+      transition: all ease-out 0.2s;
+    }
+
+    .card-size:hover {
+      transform: scale(1.015);
     }
 
     .btnMore{

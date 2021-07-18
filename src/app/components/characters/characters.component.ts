@@ -10,11 +10,12 @@ import { ErrorService } from 'src/app/providers/error-service/error-service.serv
 export class CharactersComponent implements OnInit {
   
   //Modificables
-  seleccioneCantidad = [10, 20, 50, 80, 100];
+  seleccioneCantidad = [10, 20, 50, 80, 100, 'Todos'];
   public charactersAll : any ;
-  public limit : number = 10;
+  public limit = 6;
   public loading: boolean = false;
   public notFound : boolean = false;
+  public totalRegistros = 0;
 
   constructor(
     private characterService : CharactersService,
@@ -31,8 +32,9 @@ export class CharactersComponent implements OnInit {
   async getAllCharacters () {
     this.loading = true;
     this.charactersAll = [];
-    await this.characterService.getCharactersLimit(this.limit).then((data: any = []) =>{
+    await this.characterService.getCharactersLimit(this.limit).then((data: any) =>{
       this.charactersAll = data.results;
+      this.totalRegistros = data.total;
     
     //En caso de error - Lo muestra en pantalla
     }).catch( error =>{
@@ -40,7 +42,7 @@ export class CharactersComponent implements OnInit {
       if(error.error.status){
         this.capturarMessage('Error '+ error.error.code + ': ' + (error.error.status), 'error-dialog', 3000);
       }
-      //Si es error por limite de datoa
+      //Si es error por limite de datos
       else if(error.error.message){
         this.notFound = true;
         this.errorService.capturarMessage(error.error.code + ': ' + (error.error.message), 'error-dialog', 3000)
@@ -56,12 +58,25 @@ export class CharactersComponent implements OnInit {
   /**
   * Controla la cantidad de registros para ser visualizados
   */
-  establecerCantRegistros(cant?): void {
+  async establecerCantRegistros(cant? : any, toFooter? : boolean) {
     this.loading = true
-      this.limit = cant;
 
-      // Reinicio de página
-      this.getAllCharacters();
+    // Si es obtener todos hace la petición con la cantidad total
+    if (cant === 'Todos') {
+      this.limit = this.totalRegistros;
+    } else {
+      this.limit = cant;
+    }
+
+    // Reinicio de página
+    await this.getAllCharacters();
+    // Si hay que llevar al footer lo hace
+    if (toFooter) {
+      setTimeout(() => {
+        const actions = document.getElementById('actions');
+        actions.scrollIntoView({behavior: 'smooth'});
+      }, 100);
+    }
   }
   
   //Envia el error al servicio de errores

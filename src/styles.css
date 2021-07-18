@@ -3,17 +3,6 @@ html, body { height: 100%;}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
 
 
-::-webkit-scrollbar {
-    width: 6px;
-    overflow-y: scroll;
-    background: rgba(128, 128, 128, 0.582);
-    box-shadow: inset 0 0 4px #707070;
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgb(92, 92, 92);
-    border-radius: 10px;
-}
 
 /* Controla los estilos de los mensajes de usuario */
 .success-dialog {
@@ -41,7 +30,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
     } 
 }
 div.content{
-    background-color: #e8e8e8;
+    background-color: white;
     padding: 20px;
 }
 
@@ -50,7 +39,7 @@ button.primary{
     background-color: red;
     color: white;
     font-weight: bold;
-    width: 150px;
+    width: fit-content;
 }
 
 .noMargin{
@@ -58,12 +47,14 @@ button.primary{
     padding: 5px;
 }
 
-.noMargin:hover{
-    color: red !important;
-    font-weight: bold;
-}
-
 a{
     text-decoration: none;
 }
 
+.pointer {
+    cursor: pointer !important;
+}
+
+.focus:hover {
+    background: #202020 !important;
+}
