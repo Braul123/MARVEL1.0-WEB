@@ -13,6 +13,7 @@ export class ModalDetalleComicComponent implements OnInit {
   public characters = [];
   public creators = [];
   public stories = [];
+  public related = [];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -25,8 +26,8 @@ export class ModalDetalleComicComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.data);
+    this.getDataSerie();
     if (this.data.type === 'serie') {
-      this.getDataSerie();
     }
   }
 
@@ -35,7 +36,8 @@ export class ModalDetalleComicComponent implements OnInit {
     //PERSONAJES
     await this.seriesService.getRelatedCharacters(this.dataRecord.characters.collectionURI).then((data1: any) => {
       this.characters = data1.results;
-      console.log(data1);
+      this.related = this.characters.slice(0,5)
+      console.log(this.related);
       
     }).catch(() => {
       this.errorService.capturarMessage('Could not get related characters', 'error-dialog', 2000);
@@ -44,7 +46,6 @@ export class ModalDetalleComicComponent implements OnInit {
     //CREADORES
     await this.seriesService.getRelatedCreators(this.dataRecord.creators.collectionURI).then((data2: any) => {
       this.creators = data2.results;
-      console.log(data2);
     }).catch(() => {
       this.errorService.capturarMessage('Could not get related characters', 'error-dialog', 2000);
     });
@@ -52,13 +53,22 @@ export class ModalDetalleComicComponent implements OnInit {
     //HISTORIAS
     await this.seriesService.getRelatedCreators(this.dataRecord.stories.collectionURI).then((data3: any) => {
       this.stories = data3.results;
-      console.log(data3);
     }).catch(() => {
       this.errorService.capturarMessage('Could not get related characters', 'error-dialog', 2000);
     })
   }
 
+  // Redirige a la pagina de personajes
   goDetailCharacter(id: any): void {
-    this.router.navigate(['/characters/comics'], {queryParams: {id}})
+    if (id) {
+      this.router.navigate(['/characters/comics'], {queryParams: {id}})
+      
+      // Si esta en el mis mo componente de personajes recarga la pagina
+      if (window.location.pathname === '/characters/comics') {
+        setTimeout(() => {
+          location.reload();
+        }, 100);
+      }
+    }
   }
 }

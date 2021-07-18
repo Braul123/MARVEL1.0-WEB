@@ -18,6 +18,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 const appRoutes : Routes = [
   {
@@ -55,12 +56,13 @@ const appRoutes : Routes = [
     MatAutocompleteModule,
     MatButtonModule,
     MatTabsModule,
+    MatDialogModule,
   ],
   exports: [
     FlexLayoutModule,
     RouterModule
   ],
-  providers: [],
+  providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }],
   bootstrap: [AppComponent],
   
 })

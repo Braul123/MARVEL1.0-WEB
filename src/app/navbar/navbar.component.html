@@ -4,22 +4,23 @@
   <mat-sidenav-content style="background: white; position: relative;">
     <mat-toolbar class="bar" id="header">
        <!-- Imagen y link marvel oficial -->
-       <div class="seccion" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayoutAlign="start center">
+       <div class="seccion" fxFlex="20%" fxFlex.xs="25%" fxFlex.sm="50%" fxLayoutAlign="start center">
         <a routerLink="/characters">
           <img src="assets/img/logo-marvel.png" alt="img-marvel" class="imgMarvel" title="Official Marver">
         </a>
       </div>
 
       <!-- Búsqueda -->
-      <div class="seccion" fxFlex="60%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayoutAlign="center center">
-        <form>
-          <input type="text" placeholder="Find character" class="style-input-search"
-                 [formControl]="control"
-                 [matAutocomplete]="auto" (keyup)="changeListCharacters($event)">
+      <div class="seccion" fxFlex="60%" fxFlex.xs="75%" fxFlex.sm="50%" fxLayoutAlign="center center" fxLayoutAlign.xs="end center">
+        <form fxLayoutAlign="center center">
+            <input type="text" placeholder="Find your favorite comics" class="style-input-search"
+                   [formControl]="control"
+                   [matAutocomplete]="auto" (keyup)="changeListCharacters($event)">
+                 <mat-icon class="pointer" style="color: white" (click)="reset()">clear_all</mat-icon>
           <mat-autocomplete #auto="matAutocomplete" >
-            <mat-option  *ngFor="let character of iterable | async" [value]="character.name"
-            (onSelectionChange)="selected(character)" [disabled]="character.disable">
-              {{character.name}}
+            <mat-option  *ngFor="let comic of iterable | async" [value]="comic.name"
+            (onSelectionChange)="openDetailComic(comic.data)" [disabled]="comic.disable">
+              {{comic.name}}
             </mat-option>
           </mat-autocomplete>
         </form>

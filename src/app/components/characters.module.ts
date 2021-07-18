@@ -28,6 +28,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SeriesComponent } from './series/series.component';
+import { AllComicsComponent } from './all-comics/all-comics.component';
 
 const routes = [
     {
@@ -54,6 +55,7 @@ const routes = [
         NotFoundComponent,
         HomeComponent,
         SeriesComponent,
+        AllComicsComponent,
     ],
     imports     : [
         RouterModule.forChild(routes),

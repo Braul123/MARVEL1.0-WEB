@@ -37,23 +37,23 @@ export class CharactersService {
   }
 
     /**
-   * @description Obtiene los personajes que coinciden con un nombre
+   * @description Obtiene los comics que coinciden con un nombre
    */
   getCharacterForName(name: string) {
 
     return new Promise((resolve, reject) => {
 
       try {
-        let query = `${this.CREDENTIALS}&nameStartsWith=${name}&limit=10`;
+        let query = `${this.CREDENTIALS}&titleStartsWith=${name}&limit=15`;
 
-        this.http.get(this.URL_API + 'characters' + query).subscribe((data: any = []) => {
+        this.http.get(this.URL_API + 'comics' + query).subscribe((data: any = []) => {
 
           //Crea un arreglo y lo inicializa para agregar la data modificada (name and id)
           let resultsSelected : any[] = [{name: '', id: ''}]; 
   
           //Se obtiene solo el nombre y el id del personaje
-          data.data.results.forEach(char => {
-            resultsSelected.push({name: char.name, id: char.id, disable : false})
+          data.data.results.forEach(comic => {
+            resultsSelected.push({name: comic.title, id: comic.id, data: comic, disable : false})
           });
   
           //Se borra la primera posición, está vacía

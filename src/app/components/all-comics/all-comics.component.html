@@ -1,0 +1,80 @@
+
+<!-- Si se eccedió el limite de peticiones muestra un mensaje -->
+<div *ngIf="notFound" class="content alert">
+    <app-not-found></app-not-found>
+</div>
+
+<div *ngIf="!notFound" class="content">
+    
+    <!-- Columna para el contenido -->
+    <div fxFlex fxLayout="column">
+
+        <!-- titulo del componente -->
+        <div class="header-page" fxLayout="row wrap">
+            <div fxFlex="50%" fxFlex.sm="50%" fxFlex.xs="100" fxLayoutAlign="start center">
+                <img src="../../../assets/img/characters.png" alt="characters" width="67px">
+                <mat-card-title>Marvel Comics</mat-card-title>
+            </div>
+
+            <!-- Espacio para la cantidad de registros a visualizar -->
+            <div fxFlex="49%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayoutAlign="end center">
+                <mat-form-field appearance="outline" class="fileSort">
+                    <mat-label>View Records</mat-label>
+                    <mat-select (selectionChange)="establecerCantRegistros($event.value)">
+                        <mat-option *ngFor="let c of seleccioneCantidad" [value]="c">{{c}} </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <!-- Muestra los comics -->
+        <div fxLayout="row wrap">
+            <div fxFlex="25%" fxFlex.md="33%" fxFlex.sm="50%" fxFlex.xs="100%"
+                fxLayout="column"
+                *ngFor="let comic of comicsAll" style="padding: 7px; margin-bottom: 25px;">
+
+                <mat-card class="card-size" style="background: #f9f9f9bd; padding: 20px;">
+
+                    <!-- Imagen -->
+                    <img mat-card-image
+                        src="{{comic.thumbnail.path}}.{{comic.thumbnail.extension}}"
+                        alt="{{comic.name}}" (click)="openDetailComic(comic)">
+
+                    <!-- Titulo del comic -->
+                    <mat-card-content>
+                        <mat-card-title>
+                            <span>{{comic.title}}</span>
+                        </mat-card-title>
+                    </mat-card-content> 
+
+                    <!-- Footer acciones -->
+                    <mat-card-footer fxLayout="row" fxLayoutAlign="start center">
+                        <button fxFlex="85%" (click)="openDetailComic(comic)" mat-button class="primary btnMore">VIEW MORE</button>
+                        <div fxFlex="15%" fxLayoutAlign="center center">
+                            <mat-icon (click)="addFavorites(comic)" class="icon-fav" [ngStyle]="{color: comic.isFavorite ? 'red' : ''}">favorite</mat-icon>
+                        </div>
+
+                    </mat-card-footer>
+
+                </mat-card>
+
+            </div>
+        </div>
+
+
+        <!-- Mostrar mas resultados -->
+        <div fxLayout="column" *ngIf="totalRegistros > 0" id="actions" style="margin-top: 40px;">
+            <div fxFlex="100%" fxFlex.sm="50%" fxFlex.xs="100%" fxLayoutAlign="center center">
+                <button mat-button class="primary btnMore" (click)="establecerCantRegistros(limit + 6, true)">VIEW MORE COMICS</button>
+            </div>
+
+            <!-- Registros visualizados -->
+            <p class="typography noMargin" fxFlex="100%" fxFlex.sm="50%" fxFlex.xs="100%" fxLayoutAlign="center center">{{comicsAll.length}}/{{totalRegistros}}</p>
+            <!-- Mostrar menos -->
+
+            <div *ngIf="limit > 10" fxFlex="100%" fxFlex.sm="50%" fxFlex.xs="100%" fxLayoutAlign="center center">
+                <button mat-button class="btnMore" (click)="establecerCantRegistros(limit -6, true)">SHOW FEWER COMICS</button>
+            </div>
+        </div>
+    </div>
+</div>

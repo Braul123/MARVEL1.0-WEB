@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CharactersService } from 'src/app/providers/characters/characters.service';
 import { ActivatedRoute } from '@angular/router';
 import { ErrorService } from 'src/app/providers/error-service/error-service.service';
-import { ModalDetalleComicComponent } from '../modal-detalle-comic/modal-detalle-comic.component'
+import { ModalDetalleComicComponent } from '../modal-detalle-comic/modal-detalle-comic.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ControlFavoritesService } from '../../providers/control-favorites/control-favorites.service';
 @Component({
@@ -45,7 +45,7 @@ export class ComicsCharacterComponent implements OnInit {
     this.comicsAll = []
 
     //Obtiene los comis
-    await this.charactersService.getComicsLimit(100, this.idCharacter).then((data : any = []) => {
+    await this.charactersService.getComicsLimit(30, this.idCharacter).then((data : any = []) => {
       this.comicsAll = data.results;
 
       // Pone todos los comics como 'no favoritos'

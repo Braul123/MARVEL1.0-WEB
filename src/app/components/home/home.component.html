@@ -3,11 +3,14 @@
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
 
-<mat-tab-group mat-align-tabs="center" animationDuration="0ms">
+<mat-tab-group mat-align-tabs="center" animationDuration="0ms" [selectedIndex]="1">
   <mat-tab label="SERIES">
     <app-series (process)="process($event)"></app-series>
   </mat-tab>
   <mat-tab label="CHARCTERS">
     <app-characters (process)="process($event)"></app-characters>
+  </mat-tab>
+  <mat-tab label="COMICS">
+    <app-all-comics (process)="process($event)"></app-all-comics>
   </mat-tab>
 </mat-tab-group>
