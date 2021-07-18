@@ -38,10 +38,6 @@ export class NavbarComponent implements OnInit {
     if(value) return value.name.toLowerCase().replace(/\s/g, '');
   }
 
-  goFavorites(){
-    this.router.navigate(['/characters/favorites']);
-  }
-
   selected(event: any){
     //Si viene un nombre envia al componente de comics
     if(event.name){

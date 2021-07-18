@@ -22,7 +22,7 @@ export class ControlFavoritesService {
     let favorites : any = [{ name: 'initial',value: 'initial'}]
 
     // Si no hay datos lo agrega directamente
-    if(isLength == null) {
+    if(!isLength) {
       favorites.push(data);
       //Elimina el primer objeto ... está vacío
       favorites.splice(0,1);
@@ -66,7 +66,7 @@ export class ControlFavoritesService {
     let position : number; 
 
     if(favorites.length == 1){
-      localStorage.clear();
+      localStorage.removeItem('favorites')
     }
     else if(favorites.length > 1){
       favorites.forEach((comic, index) => {
@@ -76,9 +76,8 @@ export class ControlFavoritesService {
       //Elimina el comic de favoritos
       favorites.splice(position, 1);
       localStorage.setItem('favorites', JSON.stringify(favorites));
-      this.viewMessage.capturarMessage('Updated successfully', 'success-dialog', 500);
-  
     }
+    this.viewMessage.capturarMessage('Removed', 'success-dialog', 500);
     
   }
 

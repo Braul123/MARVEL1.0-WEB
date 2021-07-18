@@ -20,6 +20,10 @@ span{
     font-size: 19px;
     font-weight: bold;
     color: #292525c4;
+    border-radius: 8px;
+    background: #e9ecff9c;
+    padding: 10px;
+    width: 100%;
 }
 
 button{
@@ -42,4 +46,20 @@ img.icon-close{
 
 button.action-buy{
     background-color: #dcdcdc
+}
+
+a{
+    cursor: pointer;
+    text-decoration: none;
+    color: #292525c4;
+    font-size: 17px;
+    letter-spacing: 1.0px;
+}
+
+a:hover {
+    color: red;
+}
+
+.mt {
+    margin-top: 13px;
 }

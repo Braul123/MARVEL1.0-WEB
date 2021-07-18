@@ -1,49 +1,88 @@
 <!-- Titulo -->
-<h1 mat-dialog-title>
-    <div fxLayout="row" fxLayoutAlign="start center">
-        <div fxFlex="90">
-            {{dataComic.title}}
-        </div>
-        <!-- Boton para cerrar la modal -->
-        <div fxFlex="10" fxLayoutAlign="end center">
-            <img mat-dialog-close fxLayoutAlign="end center"
-                src="../../../assets/img/btn-close.png" class="icon-close"
-                alt="">
-        </div>
+<div fxLayout="row" style="margin-bottom: 30px;" fxLayoutAlign="start center">
+    <div mat-dialog-title fxFlex="90">
+        {{dataRecord.title}}
     </div>
-
-</h1>
-
-<!-- Imagen y descripcion del comic -->
-<div fxLayout="row wrap" mat-dialog-content>
-    <div fxFlex="40%" fxFlex.sm="50%" fxFlex.xs="100%">
-        <img class="character"
-            src="{{dataComic.thumbnail.path}}.{{dataComic.thumbnail.extension}}"
-            alt="characters">
-    </div>
-    <div fxFlex="50%" fxFlex.sm="50%" fxFlex.xs="100%" fxLayoutAlign="center start" fxLayout="column">
-        <span>DESCRIPTION ... </span>
-        <p class="typography">{{dataComic.description? (dataComic.description) : 'No description' }}</p>
+    <!-- Boton para cerrar la modal -->
+    <div fxFlex="10" fxLayoutAlign="end center">
+        <mat-icon class="pointer" mat-dialog-close>close</mat-icon>
     </div>
 </div>
 
-<!-- Acciones -->
-<mat-dialog-actions align="end" style="margin-top: 20px;">
-    <!-- Añadir a fav -->
-    <button *ngIf="!data.isFav" mat-dialog-close mat-button class="action-fav" (click)="addFavorites(dataComic)">
-        <img src="../../../assets/img/btn-favourites-primary.png"
-            alt="favorites">
-        &nbsp; ADD TO FAVORITES
-    </button>
-    <!-- Quitar de fav -->
-    <button *ngIf="data.isFav"  mat-button class="action-fav" (click)="removeFavorite(dataComic)" [mat-dialog-close]="true">
-        <mat-icon>delete</mat-icon>
-        &nbsp; REMOVE FROM FAVORITES
-    </button>
-    <!-- Comprar -->
-    <button mat-button class="action-buy" mat-dialog-close (click)="buyComic()">
-        <img src="../../../assets/img/shopping-cart-primary.png"
-            alt="favorites">
-        &nbsp; BUY FOR ${{dataComic.prices[0]?.price}}
-    </button>
-</mat-dialog-actions>
+<!-- Imagen y descripcion del comic -->
+<div *ngIf="data.type == 'comic'" fxLayout="row wrap" mat-dialog-content style="margin-bottom: 50px;">
+    <div style="margin-bottom: 50px;" fxFlex="40%" fxFlex.sm="100%" fxFlex.md="50%" fxFlex.xs="100%" fxLayoutAlign.xs="center" fxLayoutAlign.sm="center">
+        <img class="character"
+            src="{{dataRecord.thumbnail.path}}.{{dataRecord.thumbnail.extension}}"
+            alt="characters">
+    </div>
+    <div fxFlex="50%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlex.md="50%" fxLayoutAlign="center start" fxLayout="column">
+        <span>DESCRIPTION</span>
+        <p class="typography">{{dataRecord.description? dataRecord.description : 'No description' }}</p>
+    </div>
+</div>
+
+
+<!-- PARA DETALLE DE UNA SERIE -->
+<div *ngIf="data.type == 'serie'" fxLayout="row wrap" mat-dialog-content>
+    <div style="margin-bottom: 50px;" fxFlex="40%" fxFlex.sm="100%" fxFlex.md="50%" fxFlex.xs="100%" fxLayoutAlign.xs="center" fxLayoutAlign.sm="center">
+        <img class="character"
+            src="{{dataRecord.thumbnail.path}}.{{dataRecord.thumbnail.extension}}"
+            alt="Image">
+    </div>
+    <div fxFlex="50%" fxFlex.sm="50%" fxFlex.xs="100%" fxFlex.md="50%" fxLayoutAlign="start start" fxLayout="column">
+        <!-- CREADORES -->
+        <span>CREATORS</span>
+        <div *ngIf="creators.length > 0" class="mt">
+            <ul >
+                <li *ngFor="let creator of creators">
+                   <a target="_blank" [href]="creator.urls[0].url">{{creator.fullName}}</a>
+                </li>
+            </ul>
+        </div>
+        <!-- Si no hay creadores -->
+        <div *ngIf="creators.length === 0" class="mt">
+            <ul>
+                <li>
+                   No Records
+                </li>
+            </ul>
+        </div>
+        
+        <!-- PERSONAJES -->
+        <span class="mt">CHARACTERS</span>
+        <div *ngIf="characters.length > 0" class="mt">
+            <ul >
+                <li *ngFor="let character of characters">
+                   <a mat-dialog-close (click)="goDetailCharacter(character.id)">{{character.name}}</a>
+                </li>
+            </ul>
+        </div>
+        <!-- Si no hay creadores -->
+        <div *ngIf="characters.length === 0" class="mt">
+            <ul>
+                <li>
+                   No Records
+                </li>
+            </ul>
+        </div>
+
+        <!-- HISTORIAS -->
+        <span class="mt">STORIES</span>
+        <div *ngIf="stories.length > 0" class="mt">
+            <ul>
+                <li *ngFor="let storie of stories">
+                   <a mat-dialog-close>{{storie.title}}</a>
+                </li>
+            </ul>
+        </div>
+        <!-- Si no hay creadores -->
+        <div *ngIf="stories.length === 0" class="mt">
+            <ul>
+                <li>
+                   No Records
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -17,6 +17,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
 
 const appRoutes : Routes = [
   {
@@ -53,6 +54,7 @@ const appRoutes : Routes = [
     MatProgressSpinnerModule ,
     MatAutocompleteModule,
     MatButtonModule,
+    MatTabsModule,
   ],
   exports: [
     FlexLayoutModule,

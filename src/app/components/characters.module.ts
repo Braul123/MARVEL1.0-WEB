@@ -25,11 +25,14 @@ import { ModalDetalleComicComponent } from './modal-detalle-comic/modal-detalle-
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { HomeComponent } from './home/home.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { SeriesComponent } from './series/series.component';
 
 const routes = [
     {
         path     : '',
-        component: CharactersComponent
+        component: HomeComponent
     },
     {
         path     : 'comics',
@@ -49,6 +52,8 @@ const routes = [
         ModalDetalleComicComponent,
         FavoritesComponent,
         NotFoundComponent,
+        HomeComponent,
+        SeriesComponent,
     ],
     imports     : [
         RouterModule.forChild(routes),
@@ -70,8 +75,7 @@ const routes = [
         FormsModule,
         ReactiveFormsModule,
         MatDialogModule,
-        
-        
+        MatTabsModule,
     ],
     providers: [
         CharactersService,

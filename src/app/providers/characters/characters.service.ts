@@ -1,22 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class CharactersService {
 
-  //Key para acceder a marvel api cuenta 1 ... usar segunda cuenta en caso de limite de peticiones
-  PUBLIC_KEY = '0cfe4d22a69532706e0e75c48a27ec1f';
-  HASH = 'a3578f6656d351fa2116d522c7f2d242';
-
-  //Segunda Cuenta ... Peticione limitadas
-  PUBLIC_KEY2 = 'e8bdf9e3c1fbdc0613bcbd15ec9848b6';
-  HASH2 = '9233432e3c656aa4469d4ec2b130ebdc';
-
-
-  CREDENTIALS = `?ts=1&apikey=${this.PUBLIC_KEY}&hash=${this.HASH}`
-  URL_API = `https:gateway.marvel.com/v1/public/characters`;
+  private CREDENTIALS = environment.CREDENTIALS;
+  private URL_API = environment.URL_API;
 
   constructor(private http: HttpClient) { }
 
@@ -32,7 +23,7 @@ export class CharactersService {
       try {
         let query = `${this.CREDENTIALS}&limit=${limit}`;
 
-        this.http.get(this.URL_API + query).subscribe((data: any = []) => {
+        this.http.get(this.URL_API + 'characters' + query).subscribe((data: any = []) => {
           resolve(data.data)
         }, err => {
           reject(err);  
@@ -55,7 +46,7 @@ export class CharactersService {
       try {
         let query = `${this.CREDENTIALS}&nameStartsWith=${name}&limit=10`;
 
-        this.http.get(this.URL_API + query).subscribe((data: any = []) => {
+        this.http.get(this.URL_API + 'characters' + query).subscribe((data: any = []) => {
 
           //Crea un arreglo y lo inicializa para agregar la data modificada (name and id)
           let resultsSelected : any[] = [{name: '', id: ''}]; 
@@ -89,7 +80,7 @@ export class CharactersService {
         //Genera la query para consumir el endpoint
       let query = `/${id}${this.CREDENTIALS}`;
 
-      this.http.get(this.URL_API + query).subscribe((data: any = []) => {
+      this.http.get(this.URL_API + 'characters' + query).subscribe((data: any = []) => {
         resolve(data.data)
       }, err => {
         reject(err);
@@ -116,7 +107,7 @@ export class CharactersService {
         //Genera la query para consumir el endpoint
       let query = `/${id}/comics${this.CREDENTIALS}&limit=${limit}`;
 
-      this.http.get(this.URL_API + query).subscribe((data: any = []) => {
+      this.http.get(this.URL_API + 'characters' + query).subscribe((data: any = []) => {
         resolve(data.data)
       }, err => {
         reject(err);
@@ -127,8 +118,7 @@ export class CharactersService {
       }
       
     })
-
   }
- 
+
 
 }

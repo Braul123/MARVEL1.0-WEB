@@ -13,7 +13,7 @@
       <!-- Búsqueda -->
       <div class="seccion" fxFlex="60%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayoutAlign="center center">
         <form>
-          <input type="text" placeholder="Serch character..." class="style-input-search"
+          <input type="text" placeholder="Find character" class="style-input-search"
                  [formControl]="control"
                  [matAutocomplete]="auto" (keyup)="changeListCharacters($event)">
           <mat-autocomplete #auto="matAutocomplete" >
@@ -27,21 +27,19 @@
       </div>
       <!-- Favoritos -->
       <div fxHide.lt-md class="seccion" fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayoutAlign="center center">
-        <button (click)="goFavorites()" mat-button>FAVORITES</button>
-
-        <!-- <mat-icon class="imgFavorites" matTooltip="Go Favorites" (click)="goFavorites()" >favorites</mat-icon> -->
+        <a type="button" class="buttonP" routerLink="/characters/favorites" mat-button>FAVORITES</a>
       </div>
 
     </mat-toolbar>
     <router-outlet></router-outlet>
 
-    <!-- Muestra los favoritos -->
-    <div fxHide fxShow.lt-md class="favorites pointer" (click)="goFavorites()" fxLayout="column" fxLayoutAlign="center center">
+    <!-- Muestra los favoritos en version mobile-->
+    <div fxHide fxShow.lt-md class="favorites pointer" style="z-index: 99999 !important;" routerLink="/characters/favorites" fxLayout="column" fxLayoutAlign="center center">
       <mat-icon style="color: red; width: fit-content; height: fit-content; font-size: 23px !important; ">favorite</mat-icon>
     </div>
 
     <!-- Hace scroll al inicio -->
-    <div class="toHeader pointer" (click)="toHeader()" fxLayout="column" fxLayoutAlign="center center">
+    <div class="toHeader pointer" style="z-index: 99999 !important;" (click)="toHeader()" fxLayout="column" fxLayoutAlign="center center">
       <mat-icon style="color: white; width: fit-content; height: fit-content;">keyboard_arrow_up</mat-icon>
     </div>
     </mat-sidenav-content>

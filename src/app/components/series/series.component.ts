@@ -1,25 +1,27 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CharactersService }  from 'src/app/providers/characters/characters.service'
+import { SeriesService }  from 'src/app/providers/series/series.service'
 import { ErrorService } from 'src/app/providers/error-service/error-service.service'
-
+import { ModalDetalleComicComponent } from '../modal-detalle-comic/modal-detalle-comic.component'
+import { MatDialog } from '@angular/material/dialog';
 @Component({
-  selector: 'app-characters',
-  templateUrl: './characters.component.html',
-  styleUrls: ['./characters.component.css']
+  selector: 'app-series',
+  templateUrl: './series.component.html',
+  styleUrls: ['./series.component.css']
 })
-export class CharactersComponent implements OnInit {
+export class SeriesComponent implements OnInit {
   @Output() process: EventEmitter<any> = new EventEmitter();
   
   //Modificables
   seleccioneCantidad = [10, 20, 50, 80, 100, 'Todos'];
-  public charactersAll : any ;
-  public limit = 6;
+  public seriesAll : any ;
+  public limit = 32;
   public notFound : boolean = false;
   public totalRegistros = 0;
 
   constructor(
-    private characterService : CharactersService,
+    private seriesService : SeriesService,
     private errorService: ErrorService,
+    private dialog: MatDialog,
     ) {}
 
 
@@ -31,11 +33,14 @@ export class CharactersComponent implements OnInit {
   //Obtiene todas las caracteristicas de los personajes
   async getAllCharacters () {
     this.process.emit(true);
-    this.charactersAll = [];
-    await this.characterService.getCharactersLimit(this.limit).then((data: any) =>{
-      this.charactersAll = data.results;
+    this.seriesAll = [];
+    await this.seriesService.getSeries(this.limit).then((data: any) =>{
+      this.seriesAll = data.results;
       this.totalRegistros = data.total;
-    
+      
+      console.log(this.seriesAll);
+      console.log(this.totalRegistros);
+      
     //En caso de error - Lo muestra en pantalla
     }).catch( error =>{
       //Si es exceso de peticiones
@@ -85,6 +90,17 @@ export class CharactersComponent implements OnInit {
     this.getAllCharacters();
   }
 
-  
-
+  //Abre la modal de dellate de comic
+  openDetailSerie(data: any): void {
+    this.dialog.open(ModalDetalleComicComponent, {
+      
+      data : {
+        data,
+        isFav: false,
+        type: 'serie',
+      },
+      height: 'auto',
+      width: '80%'
+    })
+  }
 }

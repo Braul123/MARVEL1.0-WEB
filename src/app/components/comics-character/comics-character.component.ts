@@ -36,7 +36,7 @@ export class ComicsCharacterComponent implements OnInit {
   //Carga los datoa
   ngOnInit() {
     this.getComics();
-    this.favorites = this.controlFavoritesService.getFavorites();
+    this.getFavorites();
   }
 
   //Obtiene todos los comics relacionados a un personaje
@@ -48,15 +48,21 @@ export class ComicsCharacterComponent implements OnInit {
     await this.charactersService.getComicsLimit(100, this.idCharacter).then((data : any = []) => {
       this.comicsAll = data.results;
 
-      // Si tiene favoritos en la lista los identifica
+      // Pone todos los comics como 'no favoritos'
       this.comicsAll.forEach((element) => {
         element.isFavorite = false;
-        this.favorites.forEach((fav) => {
-          if (fav.id && fav.id === element.id) {
-            element.isFavorite = true;
-          }
-        })
-      });
+      })
+
+      // Si tiene favoritos en la lista los identifica
+      if (this.comicsAll.length > 0 && this.favorites) {
+        this.comicsAll.forEach((element) => {
+          this.favorites.forEach((fav) => {
+            if (fav.id && fav.id === element.id) {
+              element.isFavorite = true;
+            }
+          })
+        });
+      }
       
     }).catch(error => {
       //Si ocurrio un error lo muestra en pantalla
@@ -84,6 +90,7 @@ export class ComicsCharacterComponent implements OnInit {
       data : {
         data,
         isFav: false,
+        type: 'comic'
       },
       height: 'auto',
       width: '80%'
@@ -91,8 +98,45 @@ export class ComicsCharacterComponent implements OnInit {
   }
 
   //Envia el comic al servicio para agregarlo a favoritos
-  addFavorites(data: any){
-    this.controlFavoritesService.addToFavorites(data);
+  async addFavorites(data: any){
+    let action = 'add';
+
+    // Vuelve a obtener los favoritos
+    await this.getFavorites();
+    
+    // Si hay favoritos en la lista valida si hay que agregar o eliminar
+    if (this.favorites) {
+      await this.favorites.forEach((element) => {
+        if (element.id === data.id) {
+          action = 'delete';
+          // Desmarca el comic
+          this.comicsAll.forEach(comic => {
+            if (comic.id === data.id) {
+              comic.isFavorite = false;
+            }
+          });
+          // Lo elimina de favoritos
+          this.controlFavoritesService.removeFavorite(data);
+        }
+      })
+      // Agrega el comic a favoritos
+      if (action === 'add') {
+        this.controlFavoritesService.addToFavorites(data);
+      }
+    }
+    // Si no hay comics agrega el registro directaente
+     else {
+      this.controlFavoritesService.addToFavorites(data);
+    }
+
+    // Refleja los cambios en la lista de comisc
+    if (action === 'add') {
+      this.comicsAll.forEach(comic => {
+        if (comic.id === data.id) {
+          comic.isFavorite = true;
+        }
+      });
+    }
   }
 
   //Envia el error al servicio de errores
@@ -101,4 +145,7 @@ export class ComicsCharacterComponent implements OnInit {
     this.getComics();
   }
 
+  getFavorites(): void {
+    this.favorites = this.controlFavoritesService.getFavorites();
+  }
 }
