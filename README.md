@@ -20,6 +20,7 @@ Una vez clonado el repositorio abra la carpeta en su editor de código de prefer
 # Instalar paquetes requeridos
 Desde la terminal integrada del editor de código o bien sea desde su Terminal de sistema es recomendable ejecutar 
 > npm install 
+
 en la ubicación del proyecto para instalar todas las dependencias y paquetes.
 
 # Ejecutar el proyecto
